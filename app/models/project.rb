@@ -4,4 +4,5 @@ class Project < ApplicationRecord
   belongs_to :department
   belongs_to :project_type
   belongs_to :client
+  belongs_to :business_unit
 end
