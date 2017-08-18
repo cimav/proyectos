@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @person.type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @person.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @person.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @person.phone %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @person.notes %>
+</p>
+
+<p>
+  <strong>Attachable:</strong>
+  <%= @person.attachable_id %>
+</p>
+
+<p>
+  <strong>Attachable type:</strong>
+  <%= @person.attachable_type %>
+</p>
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

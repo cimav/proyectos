@@ -1,0 +1,67 @@
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :project_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number, id: :project_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :internal_name %>
+    <%= form.text_field :internal_name, id: :project_internal_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :goal %>
+    <%= form.text_area :goal, id: :project_goal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manager_id %>
+    <%= form.number_field :manager_id, id: :project_manager_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.number_field :agent_id, id: :project_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department_id %>
+    <%= form.number_field :department_id, id: :project_department_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :business_unit_id %>
+    <%= form.number_field :business_unit_id, id: :project_business_unit_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_type_id %>
+    <%= form.number_field :project_type_id, id: :project_project_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status, id: :project_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

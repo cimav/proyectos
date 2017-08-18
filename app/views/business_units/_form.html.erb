@@ -1,0 +1,22 @@
+<%= form_with(model: business_unit, local: true) do |form| %>
+  <% if business_unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business_unit.errors.count, "error") %> prohibited this business_unit from being saved:</h2>
+
+      <ul>
+      <% business_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :business_unit_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

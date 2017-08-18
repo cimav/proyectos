@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_type: one
+  required_folder: one
+  name: MyString
+  description: MyText
+  user: one
+
+two:
+  project_type: two
+  required_folder: two
+  name: MyString
+  description: MyText
+  user: two

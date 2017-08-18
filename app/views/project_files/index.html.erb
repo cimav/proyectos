@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Project Files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Project folder</th>
+      <th>Description</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_files.each do |project_file| %>
+      <tr>
+        <td><%= project_file.name %></td>
+        <td><%= project_file.project_folder %></td>
+        <td><%= project_file.description %></td>
+        <td><%= project_file.user %></td>
+        <td><%= link_to 'Show', project_file %></td>
+        <td><%= link_to 'Edit', edit_project_file_path(project_file) %></td>
+        <td><%= link_to 'Destroy', project_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project File', new_project_file_path %>

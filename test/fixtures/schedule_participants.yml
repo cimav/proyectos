@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule: one
+  participant_id: 1
+  user: one
+
+two:
+  schedule: two
+  participant_id: 1
+  user: two

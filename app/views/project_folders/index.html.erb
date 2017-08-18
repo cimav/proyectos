@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Project Folders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Folder type</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_folders.each do |project_folder| %>
+      <tr>
+        <td><%= project_folder.name %></td>
+        <td><%= project_folder.description %></td>
+        <td><%= project_folder.folder_type %></td>
+        <td><%= project_folder.user %></td>
+        <td><%= link_to 'Show', project_folder %></td>
+        <td><%= link_to 'Edit', edit_project_folder_path(project_folder) %></td>
+        <td><%= link_to 'Destroy', project_folder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project Folder', new_project_folder_path %>

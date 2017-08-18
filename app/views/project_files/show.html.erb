@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project_file.name %>
+</p>
+
+<p>
+  <strong>Project folder:</strong>
+  <%= @project_file.project_folder %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project_file.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project_file.user %>
+</p>
+
+<%= link_to 'Edit', edit_project_file_path(@project_file) %> |
+<%= link_to 'Back', project_files_path %>
