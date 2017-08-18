@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'projects#index'
   resources :business_units
   resources :schedules
   resources :messages

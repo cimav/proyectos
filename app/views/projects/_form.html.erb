@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :client_id %>
+    <%= form.number_field :client_id, id: :project_client_id %>
+  </div>
+
+  <div class="field">
     <%= form.label :number %>
     <%= form.text_field :number, id: :project_number %>
   </div>
