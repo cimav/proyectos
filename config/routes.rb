@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   root to: 'projects#index'
+
+  get '/auth/:provider/callback' => 'sessions#create'
+  get '/auth/failure' => 'sessions#failure'
+  get "/logout" => 'sessions#destroy'
+  get '/login' => 'login#index'
+
   resources :business_units
   resources :schedules
   resources :messages

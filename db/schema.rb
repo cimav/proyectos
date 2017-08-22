@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20170818010159) do
 
-  create_table "business_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "business_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "short_name"
     t.string "real_name"
     t.text "address"
@@ -30,14 +30,14 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["industry_id"], name: "index_clients_on_industry_id"
   end
 
-  create_table "company_sizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "company_sizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_departments_on_user_id"
   end
 
-  create_table "industries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "industries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "short_name"
     t.string "name"
     t.string "image"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "title"
     t.text "content"
     t.bigint "project_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "people_type"
     t.string "name"
     t.string "email"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "project_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.bigint "project_folder_id"
     t.text "description"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_project_files_on_user_id"
   end
 
-  create_table "project_folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.text "description"
     t.integer "parent_folder"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_project_folders_on_user_id"
   end
 
-  create_table "project_institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_id"
     t.bigint "institution_id"
     t.datetime "created_at", null: false
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["project_id"], name: "index_project_institutions_on_project_id"
   end
 
-  create_table "project_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_project_participants_on_user_id"
   end
 
-  create_table "project_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_id"
     t.bigint "people_id"
     t.string "role"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["project_id"], name: "index_project_people_on_project_id"
   end
 
-  create_table "project_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_id"
     t.bigint "theme_id"
     t.datetime "created_at", null: false
@@ -143,13 +143,13 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["theme_id"], name: "index_project_themes_on_theme_id"
   end
 
-  create_table "project_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "project_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.bigint "client_id"
     t.string "number"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["client_id"], name: "index_projects_on_client_id"
   end
 
-  create_table "required_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "required_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_type_id"
     t.bigint "required_folder_id"
     t.string "name"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_required_files_on_user_id"
   end
 
-  create_table "required_folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "required_folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "project_type_id"
     t.integer "parent_folder"
     t.string "name"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_required_folders_on_user_id"
   end
 
-  create_table "schedule_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "schedule_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "schedule_id"
     t.integer "participant_id"
     t.bigint "user_id"
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_schedule_participants_on_user_id"
   end
 
-  create_table "schedules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "schedules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "title"
     t.text "content"
     t.bigint "project_id"
@@ -215,13 +215,13 @@ ActiveRecord::Schema.define(version: 20170818010159) do
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
-  create_table "themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "email"
     t.bigint "department_id"
