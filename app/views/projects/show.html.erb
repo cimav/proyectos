@@ -1,51 +1,119 @@
 <p id="notice"><%= notice %></p>
 
-<h3><%= @project.name %></h3>
+<h3 class="center"><%= @project.internal_name %></h3>
+<div>
+  <div class="col s12 center">
+<img src="<%= @project.manager.picture %>" class="circle responsive-img" id="user-top-image"><br/><%= @project.manager.name %> – <%= @project.department.name %>
+  </div>
+</div>
 
-<p>
-  <strong>Número:</strong>
-  <%= @project.number %>
-</p>
+<div class="clearfix"></div>
+<br/><br/>
 
-<p>
-  <strong>Nombre interno:</strong>
-  <%= @project.internal_name %>
-</p>
 
-<p>
-  <strong>Objetivo:</strong>
-  <%= @project.goal %>
-</p>
 
-<p>
-  <strong>Responsable:</strong>
-  <%= @project.manager.name %>
-</p>
+<div class="row">
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Resumen</span>
+        <strong>EN PROCESO</strong>
+        <p><%= @project.goal %></p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ver más</a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Agente:</strong>
-  <%= @project.agent.name %>
-</p>
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Programación</span>
+        <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ver toda la programación</a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Departmento:</strong>
-  <%= @project.department.name %>
-</p>
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Mensajes</span>
+        <p><img src="<%= @project.manager.picture %>" class="circle responsive-img left " style="padding: 0 1em 0 0" id="user-top-image"><strong>Arranque</strong> Para informarles del arranque de proyecto, la junta se llevará a cabo en...</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ir a mensajes</a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Sede:</strong>
-  <%= @project.business_unit.name %>
-</p>
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Presupuesto</span>
+        <div class="c100 p33 c-green small center">
+            <span>33%</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <p class="chiqui">
+          Monto del proyecto: $5,600,000.00
+          Tope de gasto: $1,600,000.00<br/>
+          Gastado: $528,000<br/>
+          Requisiciones: 33 (12 en proceso)
+          </p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ver presupuesto y requisiciones</a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Tipo:</strong>
-  <%= @project.project_type.name %>
-</p>
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Servicios de laboratorio</span>
+        <p>Aquí irian los servicios que han sido solicitados por el proyecto via Bitacora Electrónica</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Servicios Bitácora</a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @project.status %>
-</p>
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Personas</span>
+        <p>Aquí veriamos un directorio completo de las personas involucradas en el proyecto, tanto instituciones como clientes</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ver personas</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m4 l3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Documentos y Archivos</span>
+        <p>Aquí veriamos los documentos (acuerdos, informes, etc) y otros archivos</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Ver archivos</a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
 
 <%= link_to 'Editar', edit_project_path(@project) %> |
 <%= link_to 'Regresar', projects_path %>

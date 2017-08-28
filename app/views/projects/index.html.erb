@@ -12,11 +12,11 @@
       <li><a href="#!"><i class="material-icons">view_module</i>Ver en tarjetas</a></li>
     </ul>
 
-    <%= link_to 'Crear Nuevo Proyecto', new_project_path, class: 'waves-effect waves-light btn right' %>
+    <%= link_to 'Crear Nuevo Proyecto', new_project_path, class: 'waves-effect waves-light btn right blue' %>
   </div>
 </div>
 
-<table id="project-list" class="responsive-table">
+<table id="project-list" class="responsive-table bordered">
   <thead>
     <tr>
       <th>Proyecto</th>
@@ -32,7 +32,7 @@
     <% @projects.each do |project| %>
       <tr>
         <td>
-          <%= link_to project.name, project %>
+          <%= link_to project.internal_name, project %>
           <div class="extra"><%= project.client.short_name %></div>
         </td>
         <td class="no-wrap">
@@ -46,7 +46,15 @@
             <%= project.department.name %>
           </div>
         </td>
-        <td class="no-wrap">
+        <td class="no-wrap project-budget">
+
+          <div class="c100 p33 xsmall c-green">
+            <span>33%</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
           $5,600,000.00
           <div class="extra">Tope de gasto: $1,600,000.00</div>
         </td>

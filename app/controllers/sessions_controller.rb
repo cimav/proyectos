@@ -5,7 +5,9 @@ class SessionsController < ApplicationController
     if authenticated?
       redirect_to '/'
     else
-      render :text => '401 Unauthorized', :status => 401
+      @title = "Error 401" 
+      @message = "El usuario no está autorizado para utilizar esta aplicación."
+      render layout: 'standalone', template: 'application/error', :status => 401
     end
   end
 
@@ -15,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    render :text => '403 Auth method has failed', :status => 403
+    render html: '403 El método de autenticación fallo. Para soporte acerca de este error favor de contactar a soporte@cimav.edu.mx'.html_safe, :status => 403
   end
 
   protected
