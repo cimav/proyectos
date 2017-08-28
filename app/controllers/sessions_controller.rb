@@ -17,7 +17,9 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    render html: '403 El método de autenticación fallo. Para soporte acerca de este error favor de contactar a soporte@cimav.edu.mx'.html_safe, :status => 403
+    @title = "Error 403" 
+    @message = "El método de autenticación falló."
+    render layout: 'standalone', template: 'application/error', :status => 403
   end
 
   protected
