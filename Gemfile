@@ -38,6 +38,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml'
 gem 'jquery-rails'
 gem 'materialize-sass'
+gem 'compass-rails'
 
 gem 'omniauth-google-oauth2'
 gem 'audited'
+
