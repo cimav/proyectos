@@ -40,4 +40,4 @@ gem 'jquery-rails'
 gem 'materialize-sass'
 
 gem 'omniauth-google-oauth2'
-
+gem 'audited'
