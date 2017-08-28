@@ -6,6 +6,6 @@ class User < ApplicationRecord
   STATUS_INACTIVE = 2
 
   def picture
-  	"http://cimav.edu.mx/foto/#{email.split('@')[0]}/56"
+  	"http://cimav.edu.mx/foto/#{email.split('@')[0]}/120"
   end
 end
