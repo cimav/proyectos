@@ -1,3 +1,37 @@
 // Place all the styles related to the Login controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h5 {
+ line-height: 2.5ex;
+}
+#login-area {
+  z-index: 9999;
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  bottom: 48px;
+  width: 360px;
+  min-height: 440px;
+  background-color: rgba(255,255,255,0.95);
+}
+.slider h5 {
+  padding-right: 360px;
+  text-shadow: 2px 2px 5px #000;
+}
+.slider h3 {
+  text-shadow: 2px 2px 5px #000;
+}
+#cimav-logo {
+  width: 340px;
+  padding: 20px;
+}
+#app-logo {
+  width: 180px;
+}
+#logo-area {
+  text-align: center;
+}
+#logo-area h5 {
+  margin-bottom: 24px;
+}

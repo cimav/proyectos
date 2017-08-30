@@ -8,4 +8,9 @@ class User < ApplicationRecord
   def picture
   	"http://cimav.edu.mx/foto/#{email.split('@')[0]}/120"
   end
+
+  def full_name
+  	name
+  end
+  
 end

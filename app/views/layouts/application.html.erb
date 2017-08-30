@@ -15,27 +15,24 @@
       <ul id="user-dropdown" class="dropdown-content">
         <li>
           <a href="#!">
-            <i class="material-icons">account_circle</i>
-            Mi perfil
+            <i class="material-icons">account_circle</i> Mi perfil
+            <a href="/catalogos"><i class="material-icons">apps</i> Catálogos</a>
           </a>
         </li>
         <li class="divider"></li>
         <li>
-          <a href="/logout">
-            <i class="material-icons">exit_to_app</i>
-            Salir
-          </a>
+          <a href="/logout"><i class="material-icons">exit_to_app</i> Salir</a>
         </li>
       </ul>
 	  <nav class="white">
 	    <div class="container">
 	      <div class="nav-wrapper">
-	        <%= image_tag "logo.png", class: 'brand-logo-image' %>
+	        <%= image_tag "cimav-logo.png", class: 'brand-logo-image' %>
 	        <a href="/" class="brand-logo black-text">Proyectos</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down black-text">
                     <li>
                       <a class="dropdown-button" href="#!" data-activates="user-dropdown" data-constrainwidth="false" data-gutter="-10">
-                        <img src=<%= current_user.picture %> class="circle" id="user-top-image">
+                        <img src=<%= current_user.picture %> class="circle left" id="user-top-image"> <span class="black-text"><%= current_user.full_name %></span>
                         <i class="material-icons right black-text">arrow_drop_down</i>
                       </a>
                     </li>

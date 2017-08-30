@@ -2,8 +2,40 @@
 <html>
   <head>
     <title>Proyectos</title>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
+
   <body>
-    <%= yield %>
+  <div class="slider fullscreen">
+    <ul class="slides">
+      <li>
+        <%= image_tag "login-slide-1.jpg", class: 'slide-image' %>
+        <div class="caption left-align">
+          <h3>Misión</h3>
+          <h5 class="light grey-text text-lighten-3">Realizar investigación científica, desarrollo tecnológico, innovación y formación de recursos humanos con criterios de excelencia, en las áreas de Materiales, Energía y Medio Ambiente, para contribuir a impulsar el desarrollo sustentable del país.</h5>
+        </div>
+      </li>
+      <li>
+        <%= image_tag "login-slide-2.jpg", class: 'slide-image' %>
+        <div class="caption left-align">
+          <h3>Visión</h3>
+          <h5 class="light grey-text text-lighten-3">Ser un centro de clase mundial que eleve el nivel científico, tecnológico y de innovación del ámbito regional y nacional, en las áreas de Materiales, Energía y Medio Ambiente.</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <%= yield %>
+
+  <script>
+  $(document).ready(function(){
+      $('.slider').slider();
+  });
+  </script>
   </body>
-</html>
+  </html>
