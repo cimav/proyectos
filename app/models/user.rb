@@ -6,11 +6,11 @@ class User < ApplicationRecord
   STATUS_ACTIVE   = 1
   STATUS_INACTIVE = 2
 
-  ACCESS_STANDARD = 0
+  ACCESS_USER = 0
   ACCESS_ADMIN    = 1
 
   ACCESS_TYPE = {
-    ACCESS_STANDARD => "Estándar",
+    ACCESS_USER => "Usuario",
     ACCESS_ADMIN    => "Administrador"
   }
 
