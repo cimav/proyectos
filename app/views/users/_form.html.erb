@@ -12,31 +12,46 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :user_name %>
+    <%= form.label :first_name, 'Nombres' %>
+    <%= form.text_field :first_name, id: :user_name %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.label :last_name, 'Apellidos' %>
+    <%= form.text_field :last_name, id: :user_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, 'Correo Electrónico' %>
     <%= form.text_field :email, id: :user_email %>
   </div>
 
   <div class="field">
-    <%= form.label :department_id %>
-    <%= form.text_field :department_id, id: :user_department_id %>
+    <%= form.label :department_id, 'Departamento' %>
+    <%= form.collection_select :department_id, Department.all, :id, :name  %>
   </div>
 
   <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status, id: :user_status %>
+    <%= form.label :supervisor_id, 'Jefe Inmediato' %>
+    <%= form.collection_select :supervisor_id, User.all, :id, :full_name  %>
+
   </div>
 
   <div class="field">
-    <%= form.label :supervisor_id %>
-    <%= form.number_field :supervisor_id, id: :user_supervisor_id %>
+    <%= form.label :access, 'Tipo de acceso' %>
+    <% access_array = User::ACCESS_TYPE.invert %>
+    <%= form.select :access, options_for_select(access_array, user.access) %>
+
   </div>
 
+  <div class="field">
+    <%= form.label :status, 'Estado' %>
+    <% status_array = User::STATUS_TEXT.invert %>
+    <%= form.select :status, options_for_select(status_array, user.status) %>
+  </div>
+
+  
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Guardar', class: 'btn blue' %>
   </div>
 <% end %>

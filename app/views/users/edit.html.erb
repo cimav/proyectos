@@ -1,6 +1,11 @@
-<h1>Editing User</h1>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/usuarios" class="breadcrumb">Usuarios</a>
+        <a href="<%= edit_user_path(@user) %>" class="breadcrumb"><%= @user.full_name %></a>
+      </div>
+    </div>
+</nav>
 
 <%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <nav class="config-breadcrumb z-depth-0">
     <div class="nav-wrapper">
       <div class="col s12">
@@ -8,36 +6,38 @@
       </div>
     </div>
 </nav>
+<p id="notice"><%= notice %></p>
 
-
-<table>
+<table class="highlight bordered">
   <thead>
     <tr>
+      <th></th>
       <th>Nombre</th>
       <th>Email</th>
-      <th>Department</th>
-      <th>Status</th>
-      <th>Supervisor</th>
-      <th colspan="3"></th>
+      <th>Departmento</th>
+      <th>Jefe Inmediato</th>
+      <th>Acceso</th>
+      <th>Estado</th>
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class="tr-link" data-href="<%= edit_user_path(user) %>">
+        <th><img src="<%= user.picture %>" class="circle picture-48"></th>
         <td><%= user.first_name %> <%= user.last_name %></td>
         <td><%= user.email %></td>
-        <td><%= user.department %></td>
-        <td><%= user.status %></td>
-        <td><%= user.supervisor_id %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.department.name rescue 'Sin definir' %></td>
+        <td><%= user.supervisor.full_name rescue "Sin definir #{user.supervisor_id}"  %></td>
+        <td><%= user.access_text %></td>
+        <td><%= user.status_text %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_user_path %>"><i class="material-icons">add</i></a>
+</div>
 
-<%= link_to 'New User', new_user_path %>
+
