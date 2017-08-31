@@ -6,7 +6,6 @@
       </div>
     </div>
 </nav>
-<p id="notice"><%= notice %></p>
 
 <table class="highlight bordered">
   <thead>
@@ -39,5 +38,9 @@
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_user_path %>"><i class="material-icons">add</i></a>
 </div>
+
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>
 
 
