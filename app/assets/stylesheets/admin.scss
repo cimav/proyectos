@@ -1,3 +1,33 @@
 // Place all the styles related to the Admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.config-cards {
+  .material-icons {
+    margin-top: 20px;
+  }
+  .card {
+    padding-bottom: 20px;
+  }
+}
+
+.config-card-title {
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.config-breadcrumb {
+
+  background: none;
+  border: none;
+  .breadcrumb {
+    color: #2196f3 !important;
+    font-size: 150% !important;
+    &:before {
+      font-size: 150% !important;
+      color: #666 !important;
+    }
+  }
+  
+}

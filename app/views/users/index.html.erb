@@ -1,11 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/usuarios" class="breadcrumb">Usuarios</a>
+      </div>
+    </div>
+</nav>
+
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nombre</th>
       <th>Email</th>
       <th>Department</th>
       <th>Status</th>
@@ -17,7 +25,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= user.first_name %> <%= user.last_name %></td>
         <td><%= user.email %></td>
         <td><%= user.department %></td>
         <td><%= user.status %></td>

@@ -6,11 +6,23 @@ Rails.application.routes.draw do
   get "/logout" => 'sessions#destroy'
   get '/login' => 'login#index'
 
+
+  scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
+    resources :projects, :path => "proyectos"    
+  end
+
+  get '/configuracion' => 'admin#index'
+
+  scope '/configuracion' do
+    scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
+      resources :users, :path => "usuarios"   
+    end 
+  end
+
   resources :business_units
   resources :schedules
   resources :messages
   resources :departments
-  resources :users
   resources :project_folders
   resources :project_files
   resources :industries
@@ -20,6 +32,5 @@ Rails.application.routes.draw do
   resources :clients
   resources :project_types
   resources :themes
-  resources :projects
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
