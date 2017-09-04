@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<div class="card-alert card-green">
+<div class="card-content white-text"><p><%= notice %></p></div>
+</div>
 
 <p>
   <strong>Name:</strong>
@@ -10,5 +12,5 @@
   <%= @industry.description %>
 </p>
 
-<%= link_to 'Edit', edit_industry_path(@industry) %> |
-<%= link_to 'Back', industries_path %>
+<%= link_to 'Editar', edit_industry_path(@industry) %> |
+<%= link_to 'Regresar', industries_path %>

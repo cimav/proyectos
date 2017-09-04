@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Company Sizes</h1>
+<h1>Tamaños de compañías</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= company_size.name %></td>
         <td><%= company_size.description %></td>
-        <td><%= link_to 'Show', company_size %></td>
-        <td><%= link_to 'Edit', edit_company_size_path(company_size) %></td>
-        <td><%= link_to 'Destroy', company_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', company_size %></td>
+        <td><%= link_to 'Editar', edit_company_size_path(company_size) %></td>
+        <td><%= link_to 'Eliminar', company_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Company Size', new_company_size_path %>
+<%= link_to 'Nuevo tamaño de compañía', new_company_size_path %>

@@ -28,7 +28,7 @@ class CompanySizesController < ApplicationController
 
     respond_to do |format|
       if @company_size.save
-        format.html { redirect_to @company_size, notice: 'Company size was successfully created.' }
+        format.html { redirect_to company_sizes_path, notice: 'Tamaño de compañia creado.' }
         format.json { render :show, status: :created, location: @company_size }
       else
         format.html { render :new }

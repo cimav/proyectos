@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @department.name %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @department.user %>
+  <strong>Usuarios:</strong>
+  <%= @department.users %>
 </p>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+<%= link_to 'Editar', edit_department_path(@department) %> |
+<%= link_to 'Regresar', departments_path %>

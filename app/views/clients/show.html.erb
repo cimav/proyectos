@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Short name:</strong>
+  <strong>Nombre corto:</strong>
   <%= @client.short_name %>
 </p>
 
 <p>
-  <strong>Real name:</strong>
+  <strong>Nombre real:</strong>
   <%= @client.real_name %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong>Dirección:</strong>
   <%= @client.address %>
 </p>
 
 <p>
-  <strong>Company size:</strong>
+  <strong>Tamaño de la compañía:</strong>
   <%= @client.company_size %>
 </p>
 
 <p>
-  <strong>Industry:</strong>
+  <strong>Industria:</strong>
   <%= @client.industry_id %>
 </p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to 'Editar', edit_client_path(@client) %> |
+<%= link_to 'Regresar', clients_path %>

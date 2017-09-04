@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   scope '/configuracion' do
     scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
       resources :users, :path => "usuarios"   
+      resources :industries, :path => "industrias"   
+      resources :company_sizes, :path => "company_sizes"   
+      resources :departments, :path => "departamentos"   
+      resources :clients, :path => "clientes"   
+      resources :project_types, :path=>"proyectos"
     end 
   end
 

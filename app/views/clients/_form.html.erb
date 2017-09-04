@@ -12,28 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :short_name %>
+    <%= form.label :short_name, 'Nombre Corto' %>
     <%= form.text_field :short_name, id: :client_short_name %>
   </div>
 
   <div class="field">
-    <%= form.label :real_name %>
+    <%= form.label :real_name, 'Nombre real' %>
     <%= form.text_field :real_name, id: :client_real_name %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
+    <%= form.label :address, 'Dirección' %>
     <%= form.text_area :address, id: :client_address %>
   </div>
 
   <div class="field">
-    <%= form.label :company_size %>
-    <%= form.number_field :company_size, id: :client_company_size %>
+    <%= form.label :company_size, 'Tamaño' %>
+    <%= form.collection_select :company_size, CompanySize.all, :id, :name  %>
   </div>
 
   <div class="field">
-    <%= form.label :industry_id %>
-    <%= form.number_field :industry_id, id: :client_industry_id %>
+    <%= form.label :industry_id, 'Industria' %>
+    <%= form.collection_select :industry_id, Industry.all, :id, :name  %>
   </div>
 
   <div class="actions">
