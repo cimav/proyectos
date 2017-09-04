@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :project_statuses
   root to: 'projects#index'
 
   get '/auth/:provider/callback' => 'sessions#create'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   scope '/configuracion' do
     scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
       resources :users, :path => "usuarios"   
+      resources :project_types, :path => "tipos-de-proyectos"
     end 
   end
 
@@ -30,7 +32,6 @@ Rails.application.routes.draw do
   resources :institutions
   resources :company_sizes
   resources :clients
-  resources :project_types
   resources :themes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

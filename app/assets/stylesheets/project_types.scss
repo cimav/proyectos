@@ -1,3 +1,23 @@
 // Place all the styles related to the ProjectTypes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.project-type-sidenav-col {
+}
+
+.project-type-sidenav {
+ 
+  .project-type-sidenav-title {
+    padding: 10px;
+    text-transform: uppercase;
+    margin: 0px;
+  }
+
+  .collection {
+    margin-top: 0px;
+    height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}

@@ -12,11 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Tipo de Proyecto' %>
     <%= form.text_field :name, id: :project_type_name %>
   </div>
 
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :project_type_description, class: "materialize-textarea" %>
+  </div>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Guardar', class: 'btn blue' %>
   </div>
 <% end %>

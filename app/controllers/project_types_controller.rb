@@ -5,6 +5,8 @@ class ProjectTypesController < ApplicationController
   # GET /project_types.json
   def index
     @project_types = ProjectType.all
+    first = @project_types.first
+    redirect_to controller: 'project_types', action: 'edit', id: first.id
   end
 
   # GET /project_types/1
@@ -19,6 +21,8 @@ class ProjectTypesController < ApplicationController
 
   # GET /project_types/1/edit
   def edit
+    @params_id = params[:id]
+    @project_types = ProjectType.all
   end
 
   # POST /project_types
