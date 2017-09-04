@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830230250) do
+ActiveRecord::Schema.define(version: 20170904154620) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -156,6 +156,15 @@ ActiveRecord::Schema.define(version: 20170830230250) do
     t.index ["project_id"], name: "index_project_people_on_project_id"
   end
 
+  create_table "project_statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.integer "position"
+    t.bigint "project_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_type_id"], name: "index_project_statuses_on_project_type_id"
+  end
+
   create_table "project_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "project_id"
     t.bigint "theme_id"
@@ -169,6 +178,7 @@ ActiveRecord::Schema.define(version: 20170830230250) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -268,6 +278,7 @@ ActiveRecord::Schema.define(version: 20170830230250) do
   add_foreign_key "project_participants", "users"
   add_foreign_key "project_people", "people", column: "people_id"
   add_foreign_key "project_people", "projects"
+  add_foreign_key "project_statuses", "project_types"
   add_foreign_key "project_themes", "projects"
   add_foreign_key "project_themes", "themes"
   add_foreign_key "required_files", "project_types"
