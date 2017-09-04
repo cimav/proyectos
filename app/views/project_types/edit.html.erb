@@ -1,7 +1,15 @@
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/proyectos" class="breadcrumb">Tipos de proyectos</a>
+      </div>
+    </div>
+</nav>
+
 <div class="row">
   <div class="col s3 project-type-sidenav-col">
     <div class="card project-type-sidenav">
-      <div class="project-type-sidenav-title red white-text">Tipos de Proyecto</div>
       <div class="collection">
         <% @project_types.each do |project_type| %>
           <%
@@ -27,7 +35,7 @@
         </ul>
       </div>
       <div id="detalles" class="col s12"><%= render 'form', project_type: @project_type %></div>
-      <div id="estados" class="col s12">Test 2</div>
+      <div id="estados" class="col s12"><%= render 'statuses', project_type: @project_type %></div>
       <div id="documentos" class="col s12">Test 3</div>
     </div>
   </div>

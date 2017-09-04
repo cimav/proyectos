@@ -1,5 +1,5 @@
 class ProjectTypesController < ApplicationController
-  before_action :set_project_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_project_type, only: [:show, :edit, :update, :destroy, :reorder_status]
 
   # GET /project_types
   # GET /project_types.json
@@ -62,6 +62,20 @@ class ProjectTypesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to project_types_url, notice: 'Project type was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+
+  def reorder_status
+    i = 1
+    params[:ps].each do |ps|
+      pstatus = ProjectStatus.find(ps)
+      pstatus.position = i
+      pstatus.save
+      i += 1
+    end
+    respond_to do |format|
+      format.json { render :show, status: :ok, location: @project_type }
     end
   end
 

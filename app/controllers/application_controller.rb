@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
+  protect_from_forgery unless: -> { request.format.json? }
 
   def authenticated?
     if session[:user_auth].blank?

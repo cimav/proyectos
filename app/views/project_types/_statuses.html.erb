@@ -1,0 +1,26 @@
+<div id="sortable-statuses">
+<% project_type.project_statuses.order(:position).each do |s| %>
+    <div id="ps-<%= s.id %>" class="card">
+      <div class="card-content">
+        <input type="text" value="<%= s.name %>">
+      </div>
+    </div>
+<% end %>
+</div>
+
+<script>
+$( function() {
+  $( "#sortable-statuses" ).sortable({
+    update: function (event, ui) {
+      var order = $(this).sortable('serialize');
+
+      $.ajax({
+          data: order,
+          type: 'POST',
+          url: '<%= "#{project_type_url}/reorder-status" %>'
+      });
+    }
+  });
+  $( "#sortable" ).disableSelection();
+} );
+</script>

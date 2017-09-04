@@ -21,3 +21,9 @@
     overflow-y: auto;
   }
 }
+
+#sortable-statuses {
+  .card {
+    cursor: move;
+  }
+}
