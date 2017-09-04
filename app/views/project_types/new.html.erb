@@ -1,5 +1,11 @@
-<h2>Nuevo tipo de proyecto</h2>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/proyectos" class="breadcrumb">Tipos de proyectos</a>
+        <a href="#" class="breadcrumb">Nuevo</a>
+      </div>
+    </div>
+</nav>
 
 <%= render 'form', project_type: @project_type %>
-
-<%= link_to 'Regresar', project_types_path, class: 'right' %>

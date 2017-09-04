@@ -32,7 +32,7 @@ class ProjectTypesController < ApplicationController
 
     respond_to do |format|
       if @project_type.save
-        format.html { redirect_to @project_type, notice: 'Project type was successfully created.' }
+        format.html { redirect_to project_types_path, notice: 'Tipo de proyecto creado.' }
         format.json { render :show, status: :created, location: @project_type }
       else
         format.html { render :new }
