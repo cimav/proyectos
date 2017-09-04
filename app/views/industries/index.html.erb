@@ -1,8 +1,11 @@
-<div class="card-alert card-green">
-<div class="card-content white-black"><p id="notice"><%= notice %></p></div>
-</div>
-
-<h1>Industries</h1>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/industrias" class="breadcrumb">Industrias</a>
+      </div>
+    </div>
+</nav>
 
 <table>
   <thead>
@@ -28,4 +31,11 @@
 
 <br>
 
-<%= link_to 'New Industry', new_industry_path %>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_industry_path %>"><i class="material-icons">add</i></a>
+</div>
+
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>
+
