@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       resources :project_types, :path => "tipos-de-proyectos"  do
         member do
           post "reorder-status"
+          post "add-status"
+          post "update-status"
+          get  "statuses"
         end
       end
       resources :industries, :path => "industrias"   

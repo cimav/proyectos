@@ -1,11 +1,19 @@
-<div id="sortable-statuses">
+<div id="sortable-statuses" data-url="<%= "#{project_type_url}" %>">
 <% project_type.project_statuses.order(:position).each do |s| %>
     <div id="ps-<%= s.id %>" class="card">
       <div class="card-content">
-        <input type="text" value="<%= s.name %>">
+        <input type="text" class="project-status-item" data-id="<%= s.id %>" value="<%= s.name %>">
       </div>
     </div>
 <% end %>
+</div>
+<div id="ps-nuevo" class="card">
+  <div class="card-content">
+    <%= label 'new_status', 'Nuevo Estado' %>
+    <input type="hidden" id="project_type_id" value="<%= project_type.id %>">
+    <input type="text" id="new_status">
+    <a class="btn waves-effect waves-light blue" id="add-new-status" data-url="<%= "#{project_type_url}" %>">Agregar</a>
+  </div>
 </div>
 
 <script>
@@ -14,11 +22,19 @@ $( function() {
     update: function (event, ui) {
       var order = $(this).sortable('serialize');
 
-      $.ajax({
-          data: order,
-          type: 'POST',
-          url: '<%= "#{project_type_url}/reorder-status" %>'
-      });
+      $.post(
+          '<%= "#{project_type_url}/reorder-status" %>',
+          order,
+          function (xhr){
+          	res = $.parseJSON(xhr);
+            Materialize.toast(res['flash'], 2000);
+          }
+          
+      ).fail( 
+        function(data) {
+          Materialize.toast(res['flash'], 2000)
+        }
+      )
     }
   });
   $( "#sortable" ).disableSelection();
