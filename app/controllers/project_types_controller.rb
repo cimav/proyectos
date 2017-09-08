@@ -1,5 +1,5 @@
 class ProjectTypesController < ApplicationController
-  before_action :set_project_type, only: [:show, :edit, :update, :destroy, :reorder_status]
+  before_action :set_project_type, only: [:show, :edit, :update, :destroy, :reorder_status, :add_status, :statuses]
 
   # GET /project_types
   # GET /project_types.json
@@ -66,6 +66,11 @@ class ProjectTypesController < ApplicationController
   end
 
 
+  def statuses 
+    render layout: false
+  end
+
+
   def reorder_status
     i = 1
     params[:ps].each do |ps|
@@ -75,7 +80,79 @@ class ProjectTypesController < ApplicationController
       i += 1
     end
     respond_to do |format|
-      format.json { render :show, status: :ok, location: @project_type }
+      format.html do
+        if request.xhr?
+          json = {}
+          json[:flash] = 'Reordenado'
+          render :json => json
+        else
+          redirect_to @project_type
+        end
+      end
+      format.json { render :show, status: :ok, flash: 'Reordenado',location: @project_type }
+    end
+  end
+
+  def add_status
+    next_pos = @project_type.project_statuses.maximum(:position).next rescue 1
+    ps = @project_type.project_statuses.new
+    ps.name = params[:new_status]
+    ps.position = next_pos
+    respond_to do |format|
+      if ps.save
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:new_status_id] = ps.id
+            json[:flash] = 'Nuevo estado guardado'
+            render :json => json
+          else
+            redirect_to @project_type
+          end
+        end
+      else
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:flash] = 'Error al guardar'
+            json[:errors] = ps.errors
+            render :json => json, :status => :unprocessable_entity
+          else
+            redirect_to @project_type
+          end
+        end
+      end
+    end
+  end
+
+
+  def update_status 
+    ps = ProjectStatus.find(params[:psid])
+    ps.name = params[:value]
+    respond_to do |format|
+      if ps.save
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:psid] = ps.id
+            json[:flash] = 'Estado actualizado'
+            render :json => json
+          else
+            redirect_to @project_type
+          end
+        end
+      else
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:flash] = 'Error al guardar'
+            json[:errors] = ps.errors
+            render :json => json, :status => :unprocessable_entity
+          else
+            redirect_to @project_type
+          end
+        end
+      end
     end
   end
 
