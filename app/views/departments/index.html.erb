@@ -1,8 +1,13 @@
-<p id="notice"><%= notice %></p>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/departamentos" class="breadcrumb">Departamentos</a>
+      </div>
+    </div>
+</nav>
 
-<h1>Departamentos</h1>
-
-<table>
+<table class="highlight bordered">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -15,8 +20,7 @@
     <% @departments.each do |department| %>
       <tr>
         <td><%= department.name %></td>
-        <td><%= department.users %></td>
-        <td><%= link_to 'Ver', department %></td>
+        <td><%= department.user_id %></td>
         <td><%= link_to 'Editar', edit_department_path(department) %></td>
         <td><%= link_to 'Eliminar', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -26,4 +30,10 @@
 
 <br>
 
-<%= link_to 'Nuevo Departamento', new_department_path %>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_department_path %>"><i class="material-icons">add</i></a>
+</div>
+
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>

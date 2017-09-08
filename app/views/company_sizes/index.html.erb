@@ -1,8 +1,13 @@
-<p id="notice"><%= notice %></p>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/configuracion" class="breadcrumb">Configuración</a>
+        <a href="/configuracion/company_sizes" class="breadcrumb">Tamaños de compañias</a>
+      </div>
+    </div>
+</nav>
 
-<h1>Tamaños de compañías</h1>
-
-<table>
+<table class="highlight bordered">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -16,7 +21,6 @@
       <tr>
         <td><%= company_size.name %></td>
         <td><%= company_size.description %></td>
-        <td><%= link_to 'Mostrar', company_size %></td>
         <td><%= link_to 'Editar', edit_company_size_path(company_size) %></td>
         <td><%= link_to 'Eliminar', company_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -26,4 +30,10 @@
 
 <br>
 
-<%= link_to 'Nuevo tamaño de compañía', new_company_size_path %>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_company_size_path %>"><i class="material-icons">add</i></a>
+</div>
+
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>
