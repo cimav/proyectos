@@ -39,12 +39,35 @@ input#project_internal_name {
   font-size: 300% !important;
 }
 
-#project-cards .card .card-content {
-  height: 260px;
-  overflow-y: scroll;
+#project-cards {
+  .card {
+    .card-title {
+      font-size: 120%;
+    }
+    .card-content {
+      height: 260px;
+      overflow-y: scroll;
+    }
+  }
 }
 
-#project-cards-header .card {
-  padding: 1em;
-  text-align: center;
+#project-menu {
+  .btn {
+    font-size: 60%;
+  }
 }
+
+.card-informacion { border-top: 4px solid #e53935; }
+.card-calendario  { border-top: 4px solid #ff7043; }
+.card-mensajes    { border-top: 4px solid #ffab00; }
+.card-presupuesto { border-top: 4px solid #4caf50; }
+.card-servicios   { border-top: 4px solid #00bcd4; }
+.card-personas    { border-top: 4px solid #9c27b0; }
+.card-documentos  { border-top: 4px solid #ad1457; }
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 
 <div class="row" id="project-cards">
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-informacion">
       <div class="card-content">
         <span class="card-title">Información</span>
         <strong><%= @project.project_status.name rescue '--' %></strong><br/>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-calendario">
       <div class="card-content">
         <span class="card-title">Calendario</span>
         <ul>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-mensajes">
       <div class="card-content">
         <span class="card-title">Mensajes</span>
         <p>No existen mensajes aún</p>
@@ -44,7 +44,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-presupuesto">
       <div class="card-content">
         <span class="card-title">Presupuesto</span>
 
@@ -74,7 +74,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-servicios">
       <div class="card-content">
         <span class="card-title">Servicios de laboratorio</span>
         <p>Aquí irian los servicios que han sido solicitados por el proyecto via Bitacora Electrónica</p>
@@ -86,7 +86,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-personas">
       <div class="card-content">
         <span class="card-title">Personas</span>
         <p>Aquí veriamos un directorio completo de las personas involucradas en el proyecto, tanto instituciones como clientes</p>
@@ -98,7 +98,7 @@
   </div>
 
   <div class="col s12 m4 l4">
-    <div class="card">
+    <div class="card card-documentos">
       <div class="card-content">
         <span class="card-title">Documentos y Archivos</span>
         <p>Aquí veriamos los documentos (acuerdos, informes, etc) y otros archivos</p>
