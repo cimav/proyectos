@@ -25,8 +25,8 @@
         <td><%= client.short_name %></td>
         <td><%= client.real_name %></td>
         <td><%= client.address %></td>
-        <td><%= client.company_size %></td>
-        <td><%= client.industry_id %></td>
+        <td><%= client.company_size.name %></td>
+        <td><%= client.industry.name %></td>
         <td><%= link_to 'Ver', client %></td>
         <td><%= link_to 'Editar', edit_client_path(client) %></td>
         <td><%= link_to 'Eliminar', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
