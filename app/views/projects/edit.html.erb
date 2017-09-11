@@ -1,10 +1,4 @@
-<nav class="config-breadcrumb z-depth-0">
-    <div class="nav-wrapper">
-      <div class="col s12">
-        <a href="/" class="breadcrumb">Proyectos</a>
-        <a href="<%= edit_project_path(@project) %>" class="breadcrumb"><%= @project.internal_name %></a>
-      </div>
-    </div>
-</nav>
+<%= render 'header', project: @project, show_cards: true %>
+
 <%= render 'form', project: @project %>
 

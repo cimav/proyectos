@@ -1,49 +1,41 @@
-<p id="notice"><%= notice %></p>
+<%= render 'header', project: @project, show_cards: false %>
 
-<h3 class="center"><%= @project.internal_name %></h3>
-<div>
-  <div class="col s12 center">
-<img src="<%= @project.manager.picture %>" class="circle responsive-img" id="user-top-image"><br/><%= @project.manager.full_name %> – <%= @project.department.name %>
-  </div>
-</div>
-
-<div class="clearfix"></div>
-<br/><br/>
-
-
-
-<div class="row">
-  <div class="col s12 m4 l3">
+<div class="row" id="project-cards">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">Resumen</span>
-        <strong>EN PROCESO</strong>
-        <p><%= @project.goal %></p>
+        <span class="card-title">Información</span>
+        <strong><%= @project.project_status.name rescue '--' %></strong><br/>
+        Responsable: <%= @project.manager.full_name %><br/>
+        Agente: <%= @project.agent.full_name %>
       </div>
       <div class="card-action">
-        <a href="<%= edit_project_path(@project) %>">Editar datos generales</a>
+        <a href="<%= edit_project_path(@project) %>">Editar</a>
       </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">Programación</span>
-        <p>I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively.</p>
+        <span class="card-title">Calendario</span>
+        <ul>
+        <% @project.schedules.each do |sched| %>
+          <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
+        <% end %>
+        </ul>
       </div>
       <div class="card-action">
-        <a href="#">Ver toda la programación</a>
+        <a href="#">Ver Calendario</a>
       </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Mensajes</span>
-        <p><img src="<%= @project.manager.picture %>" class="circle responsive-img left " style="padding: 0 1em 0 0" id="user-top-image"><strong>Arranque</strong> Para informarles del arranque de proyecto, la junta se llevará a cabo en...</p>
+        <p>No existen mensajes aún</p>
       </div>
       <div class="card-action">
         <a href="#">Ir a mensajes</a>
@@ -51,32 +43,37 @@
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Presupuesto</span>
-        <div class="c100 p33 c-green small center">
-            <span>33%</span>
+
+        <% if @project.budget == 0 
+               budget_percentage = 100
+             else
+                budget_percentage = (@project.budget_available * 100 / @project.budget).round 
+             end
+          %>
+          <div class="c100 p<%= budget_percentage %> small c-green center">
+            <span><%= budget_percentage %>%</span>
             <div class="slice">
               <div class="bar"></div>
               <div class="fill"></div>
             </div>
           </div>
-          <div class="clearfix"></div>
-          <p class="chiqui">
-          Monto del proyecto: $5,600,000.00
-          Tope de gasto: $1,600,000.00<br/>
-          Gastado: $528,000<br/>
-          Requisiciones: 33 (12 en proceso)
+          <p>
+          Presupuesto: <%= number_to_currency(@project.budget) %><br/>
+          Disponible: <%= number_to_currency(@project.budget_available) %><br/>
+          Requisiciones: 0
           </p>
       </div>
       <div class="card-action">
-        <a href="#">Ver presupuesto y requisiciones</a>
+        <a href="#">Ver más</a>
       </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Servicios de laboratorio</span>
@@ -88,7 +85,7 @@
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Personas</span>
@@ -100,7 +97,7 @@
     </div>
   </div>
 
-  <div class="col s12 m4 l3">
+  <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Documentos y Archivos</span>
@@ -114,6 +111,6 @@
 
 
 </div>
-
-<%= link_to 'Editar', edit_project_path(@project) %> |
-<%= link_to 'Regresar', projects_path %>
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>

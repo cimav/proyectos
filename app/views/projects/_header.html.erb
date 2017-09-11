@@ -1,0 +1,55 @@
+<h3 class="center"><%= @project.internal_name %></h3>
+<div>
+  <div class="col s12 center">
+<img src="<%= @project.manager.picture %>" class="circle responsive-img" id="user-top-image"><br/><%= @project.manager.full_name %> – <%= @project.department.name %>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="spacer"></div>
+
+<% if show_cards %>
+<div class="row" id="project-cards-header">
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Información</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Calendario</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Mensajes</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Presupuesto</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Servicios</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Personas</a>
+    </div>
+  </div>
+
+  <div class="col s12 m2 l2">
+    <div class="card">
+      <a href="<%= edit_project_path(@project) %>">Documentos</a>
+    </div>
+  </div>
+</div>
+<% end %>
