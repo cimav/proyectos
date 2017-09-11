@@ -1,5 +1,4 @@
 <%= form_with(model: project, local: true) do |form| %>
-  <% project.internal_name = default_project_name if default_project_name != '' %>
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -18,66 +17,52 @@
   </div>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "Nombre real" %>
     <%= form.text_field :name, id: :project_name %>
   </div>
 
   <div class="field">
-    <%= form.label :client_id %>
-    <%= form.number_field :client_id, id: :project_client_id %>
+    <%= form.label :client_id, "Cliente" %>
+    <%= form.collection_select :client_id, Client.all, :id, :short_name  %>
   </div>
 
   <div class="field">
-    <%= form.label :number %>
+    <%= form.label :number, "Identificador de proyecto" %>
     <%= form.text_field :number, id: :project_number %>
   </div>
 
   <div class="field">
-    <%= form.label :goal %>
+    <%= form.label :goal, "Objetivo" %>
     <%= form.text_area :goal, id: :project_goal %>
   </div>
 
   <div class="field">
-    <%= form.label :manager_id %>
-    <%= form.number_field :manager_id, id: :project_manager_id %>
+    <%= form.label :manager_id, "Responsable del proyecto" %>
+    <%= form.collection_select :manager_id, User.all, :id, :full_name  %>
   </div>
 
   <div class="field">
-    <%= form.label :agent_id %>
-    <%= form.number_field :agent_id, id: :project_agent_id %>
+    <%= form.label :agent_id, "Agente" %>
+    <%= form.collection_select :agent_id, User.all, :id, :full_name  %>
   </div>
 
   <div class="field">
     <%= form.label :department_id %>
-    <%= form.number_field :department_id, id: :project_department_id %>
+    <%= form.collection_select :department_id, Department.all, :id, :name  %>
   </div>
 
   <div class="field">
     <%= form.label :business_unit_id %>
-    <%= form.number_field :business_unit_id, id: :project_business_unit_id %>
+    <%= form.collection_select :business_unit_id, BusinessUnit.all, :id, :name  %>
   </div>
 
   <div class="field">
     <%= form.label :project_type_id %>
-    <%= form.number_field :project_type_id, id: :project_project_type_id %>
+    <%= form.collection_select :project_type_id, ProjectType.all, :id, :name  %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status, id: :project_status %>
-  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Guardar', class: 'btn blue' %>
   </div>
 <% end %>
-
-<% 
-if default_project_name != ''
-%>
-<script>
-$('#project_internal_name').select();
-</script>
-<%
-end
-%>
