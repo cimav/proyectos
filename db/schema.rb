@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904154620) do
+ActiveRecord::Schema.define(version: 20170911051051) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 20170904154620) do
     t.datetime "updated_at", null: false
     t.integer "access"
     t.string "last_name"
+    t.integer "business_unit_id"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 

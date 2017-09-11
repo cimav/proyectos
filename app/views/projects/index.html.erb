@@ -6,10 +6,7 @@
     <a class='dropdown-button btn white black-text btn-flat' id='project-dropdown-title' href='#' data-activates='dropdown1'><%= @projects.count %> proyectos activos <i class="material-icons right black-text">arrow_drop_down</i></a>
 
     <ul id='dropdown1' class='dropdown-content'>
-      <li><a href="#!">Del departamento</a></li>
-      <li><a href="#!">Donde soy responsable</a></li>
-      <li class="divider"></li>
-      <li><a href="#!"><i class="material-icons">view_module</i>Ver en tarjetas</a></li>
+      <li><a href="#!">Proyectos activos</a></li>
     </ul>
 
     <%= link_to 'Crear Nuevo Proyecto', new_project_path, class: 'waves-effect waves-light btn right blue' %>
@@ -20,7 +17,7 @@
   <thead>
     <tr>
       <th>Proyecto</th>
-      <th>Entrega</th>
+      <th>Fecha Termino</th>
       <th>Responsable</th>
       <th>Presupuesto</th>
       <th>Status</th>

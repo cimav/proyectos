@@ -27,6 +27,9 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
 
+    @project.agent_id = current_user.id
+    @project.business_unit_id = current_user.business_unit_id
+
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }

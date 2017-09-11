@@ -15,6 +15,7 @@
       <th>Email</th>
       <th>Departmento</th>
       <th>Jefe Inmediato</th>
+      <th>Sede</th>
       <th>Acceso</th>
       <th>Estado</th>
     </tr>
@@ -28,6 +29,7 @@
         <td><%= user.email %></td>
         <td><%= user.department.name rescue 'Sin definir' %></td>
         <td><%= user.supervisor.full_name rescue "Sin definir #{user.supervisor_id}"  %></td>
+        <td><%= user.business_unit.name rescue "Sin definir #{user.business_unit_id}"  %></td>
         <td><%= user.access_text %></td>
         <td><%= user.status_text %></td>
       </tr>

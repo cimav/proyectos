@@ -1,4 +1,5 @@
 <%= form_with(model: project, local: true) do |form| %>
+  <% project.internal_name = default_project_name if default_project_name != '' %>
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -10,6 +11,11 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="field">
+    <%= form.label :internal_name, "Nombre interno" %>
+    <%= form.text_field :internal_name, id: :project_internal_name%>
+  </div>
 
   <div class="field">
     <%= form.label :name %>
@@ -24,11 +30,6 @@
   <div class="field">
     <%= form.label :number %>
     <%= form.text_field :number, id: :project_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :internal_name %>
-    <%= form.text_field :internal_name, id: :project_internal_name %>
   </div>
 
   <div class="field">
@@ -70,3 +71,13 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<% 
+if default_project_name != ''
+%>
+<script>
+$('#project_internal_name').select();
+</script>
+<%
+end
+%>

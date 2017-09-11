@@ -1,5 +1,51 @@
-<h1>Nuevo Proyecto</h1>
+<nav class="config-breadcrumb z-depth-0">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/" class="breadcrumb">Proyectos</a>
+        <a href="#" class="breadcrumb">Nuevo</a>
+      </div>
+    </div>
+</nav>
+<% @project.internal_name  = 'Proyecto nuevo' %>
+<%= form_with(model: @project, local: true) do |form| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-<%= render 'form', project: @project %>
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Regresar', projects_path %>
+  <div class="field">
+    <%= form.label :internal_name, 'Nombre Interno' %>
+    <%= form.text_field :internal_name, id: :project_internal_name%>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id, 'Cliente' %>
+    <%= form.collection_select :client_id, Client.all, :id, :short_name  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manager_id, 'Responsable del Proyecto' %>
+    <%= form.collection_select :manager_id, User.all, :id, :full_name  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_type_id, 'Tipo de Proyecto' %>
+    <%= form.collection_select :project_type_id, ProjectType.all, :id, :name  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Crear nuevo proyecto', class: 'btn blue' %>
+
+  </div>
+<% end %>
+
+<script>
+$('#project_internal_name').select();
+</script>

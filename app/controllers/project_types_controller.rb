@@ -6,7 +6,11 @@ class ProjectTypesController < ApplicationController
   def index
     @project_types = ProjectType.all
     first = @project_types.first
-    redirect_to controller: 'project_types', action: 'edit', id: first.id
+    if first 
+      redirect_to controller: 'project_types', action: 'edit', id: first.id
+    else
+      redirect_to controller: 'project_types', action: 'new'
+    end
   end
 
   # GET /project_types/1

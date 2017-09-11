@@ -1,6 +1,7 @@
 # coding: utf-8
 class User < ApplicationRecord
   belongs_to :department
+  belongs_to :business_unit
   belongs_to :supervisor, :foreign_key => "supervisor_id", :class_name => "User"
 
   STATUS_SYSTEM   = 0
