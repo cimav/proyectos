@@ -1,52 +1,21 @@
 <%= render 'header', project: @project, show_cards: false %>
 
 <div class="row" id="project-cards">
-  <div class="col s12 m4 l4">
-    <div class="card card-informacion">
+  <div class="col s12 m6 l4">
+    <div class="card card-link" data-href="<%= edit_project_path(@project) %>">
       <div class="card-content">
-        <span class="card-title">Información</span>
+        <div class="project-card-title title-informacion">Información</div>
         <strong><%= @project.project_status.name rescue '--' %></strong><br/>
         Responsable: <%= @project.manager.full_name %><br/>
         Agente: <%= @project.agent.full_name %>
       </div>
-      <div class="card-action">
-        <a href="<%= edit_project_path(@project) %>">Editar</a>
-      </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l4">
-    <div class="card card-calendario">
+  <div class="col s12 m6 l4">
+    <div class="card">
       <div class="card-content">
-        <span class="card-title">Calendario</span>
-        <ul>
-        <% @project.schedules.each do |sched| %>
-          <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
-        <% end %>
-        </ul>
-      </div>
-      <div class="card-action">
-        <a href="#">Ver Calendario</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s12 m4 l4">
-    <div class="card card-mensajes">
-      <div class="card-content">
-        <span class="card-title">Mensajes</span>
-        <p>No existen mensajes aún</p>
-      </div>
-      <div class="card-action">
-        <a href="#">Ir a mensajes</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s12 m4 l4">
-    <div class="card card-presupuesto">
-      <div class="card-content">
-        <span class="card-title">Presupuesto</span>
+        <div class="project-card-title title-presupuesto">Presupuesto</div>
 
         <% if @project.budget == 0 
                budget_percentage = 100
@@ -67,44 +36,54 @@
           Requisiciones: 0
           </p>
       </div>
-      <div class="card-action">
-        <a href="#">Ver más</a>
+    </div>
+  </div>
+
+  <div class="col s12 m6 l4">
+    <div class="card">
+      <div class="card-content">
+        <div class="project-card-title title-mensajes">Mensajes</div>
+        <p>No existen mensajes aún</p>
       </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l4">
-    <div class="card card-servicios">
+  <div class="col s12 m6 l4">
+    <div class="card">
       <div class="card-content">
-        <span class="card-title">Servicios de laboratorio</span>
+        <div class="project-card-title title-calendario">Calendario</div>
+        <ul>
+        <% @project.schedules.each do |sched| %>
+          <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m6 l4">
+    <div class="card">
+      <div class="card-content">
+        <div class="project-card-title title-servicios">Servicios de laboratorio</div>
         <p>Aquí irian los servicios que han sido solicitados por el proyecto via Bitacora Electrónica</p>
       </div>
-      <div class="card-action">
-        <a href="#">Servicios Bitácora</a>
-      </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l4">
-    <div class="card card-personas">
+  <div class="col s12 m6 l4">
+    <div class="card">
       <div class="card-content">
-        <span class="card-title">Personas</span>
+        <div class="project-card-title title-personas">Personas</div>
         <p>Aquí veriamos un directorio completo de las personas involucradas en el proyecto, tanto instituciones como clientes</p>
       </div>
-      <div class="card-action">
-        <a href="#">Ver personas</a>
-      </div>
     </div>
   </div>
 
-  <div class="col s12 m4 l4">
-    <div class="card card-documentos">
+  <div class="col s12 m6 l4">
+    <div class="card">
       <div class="card-content">
-        <span class="card-title">Documentos y Archivos</span>
+        <div class="project-card-title title-documentos">Documentos y Archivos</div>
         <p>Aquí veriamos los documentos (acuerdos, informes, etc) y otros archivos</p>
-      </div>
-      <div class="card-action">
-        <a href="#">Ver archivos</a>
       </div>
     </div>
   </div>
@@ -113,4 +92,7 @@
 </div>
 <script>
 Materialize.toast('<%= notice %>', 3000)
+$(".card-link").click(function() {
+  window.location = $(this).data("href");
+});
 </script>

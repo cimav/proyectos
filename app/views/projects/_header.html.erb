@@ -1,8 +1,11 @@
-<h3 class="center"><%= @project.internal_name %></h3>
-<div>
-  <div class="col s12 center">
-<img src="<%= @project.manager.picture %>" class="circle responsive-img" id="user-top-image"><br/><%= @project.manager.full_name %> – <%= @project.department.name %>
-  </div>
+<h3 class="center project-title-header"> <%= link_to @project.internal_name, @project %></h3>
+<div class="center project-participants">
+  <!-- RESPONSABLE -->
+  <img src="<%= @project.manager.picture %>" class="circle picture-48 responsive-img tooltipped" data-position="bottom" data-delay="50" data-tooltip="Responsable: <%= @project.manager.full_name %>">
+  <!-- OTROS PARTICIPANTES -->
+  <img src="<%= @project.agent.picture %>" class="circle picture-48 responsive-img tooltipped" data-position="bottom" data-delay="50" data-tooltip="Agente: <%= @project.agent.full_name %>">
+  <!-- AGREGAR -->
+  <%= image_tag "dots.png", class: 'circle picture-48 responsive-img' %>
 </div>
 
 <div class="clearfix"></div>

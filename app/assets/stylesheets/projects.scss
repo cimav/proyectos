@@ -8,6 +8,25 @@
   text-align: left !important;
 }
 
+h3.project-title-header {
+  font-weight: 500;
+  font-size: 220%;
+  margin-bottom: 0.4em;
+  a {
+    color: #000;
+  }
+}
+
+.project-participants {
+  img {
+    margin: 0 5px;
+  }
+  .btn-floating {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
 #project-list {
   margin-top: 2em;
   padding: 0 10px 0 0;
@@ -41,12 +60,23 @@ input#project_internal_name {
 
 #project-cards {
   .card {
-    .card-title {
-      font-size: 120%;
+    font-size: 85%;
+    padding-top: 0.5em;
+    .project-card-title {
+      font-weight: 500;
+      text-align: center;
+      font-size: 160%;
+      padding: 0.5em 0;
+      margin-bottom: 0.5em;
     }
     .card-content {
-      height: 260px;
-      overflow-y: scroll;
+      padding-top: 0.5em !important;
+      height: 300px;
+      overflow-y: hidden;
+    }
+    &:hover {
+      background: #fcfcfc;
+      cursor: pointer;
     }
   }
 }
@@ -64,6 +94,14 @@ input#project_internal_name {
 .card-servicios   { border-top: 4px solid #00bcd4; }
 .card-personas    { border-top: 4px solid #9c27b0; }
 .card-documentos  { border-top: 4px solid #ad1457; }
+
+.title-informacion { border-bottom: 2px solid #e53935; }
+.title-calendario  { border-bottom: 2px solid #ff7043; }
+.title-mensajes    { border-bottom: 2px solid #ffab00; }
+.title-presupuesto { border-bottom: 2px solid #4caf50; }
+.title-servicios   { border-bottom: 2px solid #00bcd4; }
+.title-personas    { border-bottom: 2px solid #9c27b0; }
+.title-documentos  { border-bottom: 2px solid #ad1457; }
 
 
 
