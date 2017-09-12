@@ -7,7 +7,7 @@
     </div>
 </nav>
 
-<table>
+<table class="highlight bordered">
   <thead>
     <tr>
       <th>Nombre corto</th>
@@ -15,21 +15,17 @@
       <th>Dirección</th>
       <th>Tamaño de la empresa</th>
       <th>Industria</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @clients.each do |client| %>
-      <tr>
+      <tr class="tr-link" data-href="<%= edit_client_path(client) %>">
         <td><%= client.short_name %></td>
         <td><%= client.real_name %></td>
         <td><%= client.address %></td>
         <td><%= client.company_size.name %></td>
         <td><%= client.industry.name %></td>
-        <td><%= link_to 'Ver', client %></td>
-        <td><%= link_to 'Editar', edit_client_path(client) %></td>
-        <td><%= link_to 'Eliminar', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
