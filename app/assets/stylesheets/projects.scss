@@ -87,17 +87,31 @@ input#project_internal_name {
   }
 }
 
+.project-card-icon {
+  margin-top: 2em;
+}
+
+.project-card-initial-message {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+.person-card {
+  font-size: 80%;
+  margin-top: 1em;
+}
+
 .card-informacion { border-top: 4px solid #e53935; }
-.card-calendario  { border-top: 4px solid #ff7043; }
-.card-mensajes    { border-top: 4px solid #ffab00; }
+.card-mensajes  { border-top: 4px solid #ff7043; }
+.card-calendario    { border-top: 4px solid #ffab00; }
 .card-presupuesto { border-top: 4px solid #4caf50; }
 .card-servicios   { border-top: 4px solid #00bcd4; }
 .card-personas    { border-top: 4px solid #9c27b0; }
 .card-documentos  { border-top: 4px solid #ad1457; }
 
 .title-informacion { border-bottom: 2px solid #e53935; }
-.title-calendario  { border-bottom: 2px solid #ff7043; }
-.title-mensajes    { border-bottom: 2px solid #ffab00; }
+.title-mensajes  { border-bottom: 2px solid #ff7043; }
+.title-calendario    { border-bottom: 2px solid #ffab00; }
 .title-presupuesto { border-bottom: 2px solid #4caf50; }
 .title-servicios   { border-bottom: 2px solid #00bcd4; }
 .title-personas    { border-bottom: 2px solid #9c27b0; }

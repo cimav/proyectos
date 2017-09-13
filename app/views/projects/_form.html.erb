@@ -11,14 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :internal_name, "Nombre interno" %>
+  <div class="input-field field">
+    <%= form.label :internal_name, "Proyecto" %>
     <%= form.text_field :internal_name, id: :project_internal_name%>
-  </div>
-
-  <div class="field">
-    <%= form.label :name, "Nombre real" %>
-    <%= form.text_field :name, id: :project_name %>
   </div>
 
   <div class="field">
@@ -26,14 +21,14 @@
     <%= form.collection_select :client_id, Client.all, :id, :short_name  %>
   </div>
 
-  <div class="field">
+  <div class="input-field field">
     <%= form.label :number, "Identificador de proyecto" %>
     <%= form.text_field :number, id: :project_number %>
   </div>
 
-  <div class="field">
+  <div class="input-field field">
     <%= form.label :goal, "Objetivo" %>
-    <%= form.text_area :goal, id: :project_goal %>
+    <%= form.text_area :goal, id: :project_goal, class: 'materialize-textarea' %>
   </div>
 
   <div class="field">
@@ -42,22 +37,22 @@
   </div>
 
   <div class="field">
-    <%= form.label :agent_id, "Agente" %>
+    <%= form.label :agent_id, "Ejecutivo" %>
     <%= form.collection_select :agent_id, User.all, :id, :full_name  %>
   </div>
 
   <div class="field">
-    <%= form.label :department_id %>
+    <%= form.label :department_id, "Departamento" %>
     <%= form.collection_select :department_id, Department.all, :id, :name  %>
   </div>
 
   <div class="field">
-    <%= form.label :business_unit_id %>
+    <%= form.label :business_unit_id, "Sede" %>
     <%= form.collection_select :business_unit_id, BusinessUnit.all, :id, :name  %>
   </div>
 
   <div class="field">
-    <%= form.label :project_type_id %>
+    <%= form.label :project_type_id, "Tipo de proyecto" %>
     <%= form.collection_select :project_type_id, ProjectType.all, :id, :name  %>
   </div>
 

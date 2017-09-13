@@ -1,4 +1,4 @@
-<%= render 'header', project: @project, show_cards: false %>
+<%= render 'header', project: @project, show_top_menu: false %>
 
 <div class="row" id="project-cards">
   <div class="col s12 m6 l4">
@@ -16,25 +16,29 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-presupuesto">Presupuesto</div>
-
-        <% if @project.budget == 0 
-               budget_percentage = 100
-             else
-                budget_percentage = (@project.budget_available * 100 / @project.budget).round 
-             end
-          %>
-          <div class="c100 p<%= budget_percentage %> small c-green center">
-            <span><%= budget_percentage %>%</span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
+          <% if false %>
+            <% if @project.budget == 0 
+                 budget_percentage = 100
+               else
+                  budget_percentage = (@project.budget_available * 100 / @project.budget).round 
+               end
+            %>
+            <div class="c100 p<%= budget_percentage %> small c-green center">
+              <span><%= budget_percentage %>%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
             </div>
-          </div>
-          <p>
-          Presupuesto: <%= number_to_currency(@project.budget) %><br/>
-          Disponible: <%= number_to_currency(@project.budget_available) %><br/>
-          Requisiciones: 0
-          </p>
+            <p>
+            Presupuesto: <%= number_to_currency(@project.budget) %><br/>
+            Disponible: <%= number_to_currency(@project.budget_available) %><br/>
+            Requisiciones: 0
+            </p>
+          <% else %>
+            <div class="project-card-icon center"><i class="material-icons large green-text">attach_money</i></div>
+            <div class="project-card-initial-message">Ve el estado del presupuesto de tu proyecto. Es neceario tener capturado el número de proyecto del sistema <strong>NetMultix</strong>.</div>
+          <% end %>
       </div>
     </div>
   </div>
@@ -43,7 +47,8 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-mensajes">Mensajes</div>
-        <p>No existen mensajes aún</p>
+        <div class="project-card-icon center"><i class="material-icons large deep-orange-text">message</i></div>
+        <div class="project-card-initial-message">Publica anuncios, avances, ideas, etc. y compartelos con todos los involucrados.</div>
       </div>
     </div>
   </div>
@@ -52,11 +57,16 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-calendario">Calendario</div>
-        <ul>
-        <% @project.schedules.each do |sched| %>
-          <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
+        <% if @project.schedules.count > 0 %>
+          <ul>
+          <% @project.schedules.each do |sched| %>
+            <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
+          <% end %>
+          </ul>
+        <% else %>
+          <div class="project-card-icon center"><i class="material-icons large amber-text">today</i></div>
+          <div class="project-card-initial-message">Publica fechas importantes del proyecto.</div>
         <% end %>
-        </ul>
       </div>
     </div>
   </div>
@@ -65,7 +75,8 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-servicios">Servicios de laboratorio</div>
-        <p>Aquí irian los servicios que han sido solicitados por el proyecto via Bitacora Electrónica</p>
+        <div class="project-card-icon center"><i class="material-icons large cyan-text">view_module</i></div>
+        <div class="project-card-initial-message">El proyecto aún no tiene servicios registrados en <strong>Bitácora Electrónica</strong>.</div>
       </div>
     </div>
   </div>
@@ -74,7 +85,22 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-personas">Personas</div>
-        <p>Aquí veriamos un directorio completo de las personas involucradas en el proyecto, tanto instituciones como clientes</p>
+        <div class="row">
+          <div class="col s12 m6 s6">
+            <div class="person-card center">
+              <img src="<%= @project.manager.picture %>" class="circle picture-48 responsive-img"><br/>
+              <strong><%= @project.manager.full_name %></strong><br/>
+              Responsable Técnico.
+            </div>
+          </div>
+          <div class="col s12 m6 s6 center">
+            <div class="person-card center">
+              <img src="<%= @project.agent.picture %>" class="circle picture-48 responsive-img"><br/>
+              <strong><%= @project.agent.full_name %></strong><br/>
+              Ejecutivo CIMAV
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -83,7 +109,8 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-documentos">Documentos y Archivos</div>
-        <p>Aquí veriamos los documentos (acuerdos, informes, etc) y otros archivos</p>
+        <div class="project-card-icon center"><i class="material-icons large pink-text">folder</i></div>
+        <div class="project-card-initial-message">Comparte documentos, archivos, imagenes, reportes.</div>
       </div>
     </div>
   </div>
