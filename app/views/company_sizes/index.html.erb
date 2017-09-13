@@ -2,7 +2,7 @@
     <div class="nav-wrapper">
       <div class="col s12">
         <a href="/configuracion" class="breadcrumb">Configuración</a>
-        <a href="/configuracion/company_sizes" class="breadcrumb">Tamaño Empresa</a>
+        <a href="/configuracion/company_sizes" class="breadcrumb">Tamaños de Empresas</a>
       </div>
     </div>
 </nav>
@@ -18,11 +18,9 @@
 
   <tbody>
     <% @company_sizes.each do |company_size| %>
-      <tr>
+      <tr class="tr-link" data-href="<%= edit_company_size_path(company_size) %>">
         <td><%= company_size.name %></td>
         <td><%= company_size.description %></td>
-        <td><%= link_to 'Editar', edit_company_size_path(company_size) %></td>
-        <td><%= link_to 'Eliminar', company_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
