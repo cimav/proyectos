@@ -1,0 +1,10 @@
+<%= render 'header', project: @project, show_top_menu: true %>
+<div class="project-area z-depth-1">
+  <div class="show-message">
+    <div class="message-title"><%= @message.title %></div>
+    <div class="message-content"><%= @message.content.html_safe %></div>
+    <div class="fixed-action-btn">
+      <a href="<%= edit_message_project_url(message_id: @message.id) %>" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a>
+    </div>
+  </div>
+</div>

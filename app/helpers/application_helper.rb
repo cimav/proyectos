@@ -1,5 +1,29 @@
 module ApplicationHelper
-  def future_date(date)
+  def f_date(date)
+    if "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day}"
+      r_date = "Hoy"
+      r_date = r_date + " a las " + date.strftime("%H:%M") if (date.hour != 0)
+    elsif "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day - 1}"
+      r_date = "Ayer"
+      r_date = r_date + " a las " + date.strftime("%H:%M") if (date.hour != 0)
+    elsif "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day + 1}"
+      r_date = "Mañana"
+      r_date = r_date + " a las " + date.strftime("%H:%M") if (date.hour != 0)
+    else
+      r_date = date.strftime("%b %e, %Y")
+      r_date = r_date + date.strftime("%H:%M") if (date.hour != 0)
+
+      # d = "#{date.year}#{date.month}#{date.day}".to_i
+      # t = "#{Time.now.year}#{Time.now.month}#{Time.now.day}".to_i
+      # if d > t
+      #   r_date = "En #{t - d} días"
+      # else 
+      #   r_date = "Hace #{d - t} días"
+      # end
+    end
+  end
+
+  def f_date_no_time(date)
     if "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day}"
       r_date = "Hoy"
     elsif "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day - 1}"
@@ -9,7 +33,12 @@ module ApplicationHelper
     else
       d = "#{date.year}#{date.month}#{date.day}".to_i
       t = "#{Time.now.year}#{Time.now.month}#{Time.now.day}".to_i
-      r_date = "En #{t - d} días"
+      if d > t
+        r_date = "En #{t - d} días"
+      else 
+        r_date = "Hace #{d - t} días"
+      end
     end
   end
+
 end

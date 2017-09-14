@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<div class="project-area z-depth-1">
 <div class="row">
   <div class="col s12">
 
@@ -34,7 +33,7 @@
         </td>
         <td class="no-wrap">
           <%= project.end_schedule.end_date.strftime "%B %e, %Y" rescue '--' %>
-          <div class="extra"><%= future_date(project.end_schedule.end_date) rescue '--' %></div>
+          <div class="extra"><%= f_date_no_time(project.end_schedule.end_date) rescue '--' %></div>
         </td>
         <td class="no-wrap project-manager">
           <img src="<%= project.manager.picture %>" class="left circle">
@@ -65,3 +64,4 @@
     <% end %>
   </tbody>
 </table>
+</div>

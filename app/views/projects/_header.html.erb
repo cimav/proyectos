@@ -1,14 +1,11 @@
 <h3 class="center project-title-header"> <%= link_to @project.internal_name, @project %></h3>
+<!--
 <div class="center project-participants">
-  <!-- RESPONSABLE -->
   <img src="<%= @project.manager.picture %>" class="circle picture-48 responsive-img tooltipped" data-position="bottom" data-delay="50" data-tooltip="Responsable: <%= @project.manager.full_name %>">
-  <!-- OTROS PARTICIPANTES -->
   <img src="<%= @project.agent.picture %>" class="circle picture-48 responsive-img tooltipped" data-position="bottom" data-delay="50" data-tooltip="Agente: <%= @project.agent.full_name %>">
-  <!-- AGREGAR -->
   <%= image_tag "dots.png", class: 'circle picture-48 responsive-img' %>
 </div>
-
-<div class="clearfix"></div>
+-->
 <div class="spacer"></div>
 
 <% if show_top_menu %>
@@ -16,7 +13,7 @@
 <tr>
 <td><a class="waves-effect waves-light btn red darken-1" href="<%= edit_project_path(@project) %>">Información</a></td>
 <td><a class="waves-effect waves-light btn green" href="<%= edit_project_path(@project) %>">Presupuesto</a></td>
-<td><a class="waves-effect waves-light btn deep-orange lighten-1" href="<%= edit_project_path(@project) %>">Mensajes</a></td>
+<td><a class="waves-effect waves-light btn deep-orange lighten-1" href="<%= "#{project_url(@project)}" %>/mensajes">Mensajes</a></td>
 <td><a class="waves-effect waves-light btn amber accent-4" href="<%= edit_project_path(@project) %>">Calendario</a></td>
 <td><a class="waves-effect waves-light btn cyan" href="<%= edit_project_path(@project) %>">Servicios</a></td>
 <td><a class="waves-effect waves-light btn purple" href="<%= edit_project_path(@project) %>">Personas</a></td>

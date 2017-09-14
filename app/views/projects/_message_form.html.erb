@@ -1,0 +1,21 @@
+<%= form_with(model: message, local: true) do |form| %>
+  <% if message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% message.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.hidden_field :project_id, value: project.id %>
+  <div class="input-field field">
+    <%= form.text_field :title, id: :messages_title, placeholder: 'Título...' %>
+  </div>
+  <%= form.trix_editor :content, height: 400  %>
+  <div class="message-button-area">
+    <%= form.submit 'Publicar mensaje', class: 'btn blue' %>
+  </div>
+<% end %>

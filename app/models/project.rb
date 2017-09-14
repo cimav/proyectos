@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   belongs_to :business_unit
   belongs_to :project_status, :foreign_key => "status", :class_name => "ProjectStatus"
   has_many   :schedules
+  has_many   :messages
 
 
   before_validation :set_extra, on: :create

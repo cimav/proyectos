@@ -1,0 +1,8 @@
+<%= render 'projects/header', project: @project, show_top_menu: true %>
+<div class="project-area z-depth-1 message-form">
+<%= render 'projects/message_form', project: @project, message: @message %>
+</div>
+
+<script>
+$("#messages_title").select();
+</script>

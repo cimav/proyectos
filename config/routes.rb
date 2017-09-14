@@ -9,7 +9,14 @@ Rails.application.routes.draw do
 
 
   scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
-    resources :projects, :path => "proyectos"    
+    resources :projects, :path => "proyectos"  do
+      member do
+        get :messages, :path => "mensajes"
+        get :new_message, :path => "mensajes/nuevo"
+        get :show_message, :path => "mensajes/:message_id"
+        get :edit_message, :path => "mensajes/:message_id/editar"
+      end
+    end   
   end
 
   get '/configuracion' => 'admin#index'

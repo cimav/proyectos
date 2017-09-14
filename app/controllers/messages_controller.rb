@@ -25,13 +25,15 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
+    @message.user_id = current_user.id
+    @message.status = Message::ACTIVE
+    @project = @message.project
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_project_url(@project), notice: 'Mensaje publicado.' }
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :new }
+        format.html { render "projects/new_message", message: @message, project: @project, notice: 'No se pudo publicar.'}
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
@@ -40,12 +42,13 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
+    @project = @message.project
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { render :show, status: :ok, location: @message }
+        format.html { redirect_to messages_project_url(@project), notice: 'Mensaje actualizado.' }
+        format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :edit }
+        format.html { render "projects/edit_message", message: @message, project: @project, notice: 'No se pudo actualizar.'}
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

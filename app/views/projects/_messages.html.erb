@@ -1,0 +1,14 @@
+<div class="project-area-title">Mensajes</div>
+<div class="project-area-actions"><a href="<%= "#{project_url}" %>/mensajes/nuevo" class="btn blue">Publicar un mensaje</a></div>
+
+<table class="messages-list">
+<% @project.messages.where(status: Message::ACTIVE).order('created_at DESC').each do |msg| %>
+<tr>
+  <td class="avatar-td"><img src="<%= msg.user.picture %>" class="circle responsive-img picture-48"></td>
+  <td>
+    <div class="message-meta"><%= msg.user.full_name %> • <%= f_date(msg.created_at) %></div>
+    <div class="message-content"><a href="<%= "#{project_url}" %>/mensajes/<%= msg.id %>"><strong><%= msg.title %></strong> – <%= strip_tags(msg.content).truncate_words(40) %></a></div>
+  </td>
+</tr>
+<% end %>
+</table>
