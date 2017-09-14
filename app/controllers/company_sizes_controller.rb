@@ -28,7 +28,7 @@ class CompanySizesController < ApplicationController
 
     respond_to do |format|
       if @company_size.save
-        format.html { redirect_to company_sizes_path, notice: 'Tamaño de compañia creado.' }
+        format.html { redirect_to company_sizes_path, notice: 'Tamaño de empresa creado.' }
         format.json { render :show, status: :created, location: @company_size }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CompanySizesController < ApplicationController
   def update
     respond_to do |format|
       if @company_size.update(company_size_params)
-        format.html { redirect_to @company_size, notice: 'Company size was successfully updated.' }
+        format.html { redirect_to company_sizes_path, notice: 'Tamaño de empresa actualizado.' }
         format.json { render :show, status: :ok, location: @company_size }
       else
         format.html { render :edit }

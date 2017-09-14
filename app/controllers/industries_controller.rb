@@ -42,7 +42,7 @@ class IndustriesController < ApplicationController
   def update
     respond_to do |format|
       if @industry.update(industry_params)
-        format.html { redirect_to @industry, notice: 'Industry was successfully updated.' }
+        format.html { redirect_to industries_path, notice: 'Industria actualizada correctamente.' }
         format.json { render :show, status: :ok, location: @industry }
       else
         format.html { render :edit }
