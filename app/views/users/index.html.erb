@@ -7,14 +7,13 @@
     </div>
 </nav>
 
+<div class="admin-area z-depth-1">
 <table class="highlight bordered">
   <thead>
     <tr>
       <th></th>
       <th>Nombre</th>
-      <th>Email</th>
       <th>Departmento</th>
-      <th>Jefe Inmediato</th>
       <th>Sede</th>
       <th>Acceso</th>
       <th>Estado</th>
@@ -25,10 +24,9 @@
     <% @users.each do |user| %>
       <tr class="tr-link" data-href="<%= edit_user_path(user) %>">
         <th><img src="<%= user.picture %>" class="circle picture-48"></th>
-        <td><%= user.first_name %> <%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.department.name rescue 'Sin definir' %></td>
-        <td><%= user.supervisor.full_name rescue "Sin definir #{user.supervisor_id}"  %></td>
+        <td><%= user.first_name %> <%= user.last_name %><br/><%= user.email %></td>
+        <td><%= user.department.name rescue 'Sin definir' %><br/>
+            Jefe: <%= user.supervisor.full_name rescue "Sin definir #{user.supervisor_id}"  %></td>
         <td><%= user.business_unit.name rescue "Sin definir #{user.business_unit_id}"  %></td>
         <td><%= user.access_text %></td>
         <td><%= user.status_text %></td>
@@ -36,6 +34,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_user_path %>"><i class="material-icons">add</i></a>
