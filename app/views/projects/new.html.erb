@@ -6,6 +6,7 @@
       </div>
     </div>
 </nav>
+<div class="admin-area z-depth-1">
 <% @project.internal_name  = 'Proyecto nuevo' %>
 <%= form_with(model: @project, local: true) do |form| %>
   <% if @project.errors.any? %>
@@ -45,7 +46,7 @@
 
   </div>
 <% end %>
-
+</div>
 <script>
 $('#project_internal_name').select();
 </script>
