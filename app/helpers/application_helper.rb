@@ -11,7 +11,7 @@ module ApplicationHelper
       r_date = r_date + " a las " + date.strftime("%H:%M") if (date.hour != 0)
     else
       r_date = date.strftime("%b %e, %Y")
-      r_date = r_date + date.strftime("%H:%M") if (date.hour != 0)
+      r_date = r_date + " " + date.strftime("%H:%M") if (date.hour != 0)
 
       # d = "#{date.year}#{date.month}#{date.day}".to_i
       # t = "#{Time.now.year}#{Time.now.month}#{Time.now.day}".to_i
@@ -34,9 +34,9 @@ module ApplicationHelper
       d = "#{date.year}#{date.month}#{date.day}".to_i
       t = "#{Time.now.year}#{Time.now.month}#{Time.now.day}".to_i
       if d > t
-        r_date = "En #{t - d} días"
+        r_date = "En #{d - t} días"
       else 
-        r_date = "Hace #{d - t} días"
+        r_date = "Hace #{t - d} días"
       end
     end
   end

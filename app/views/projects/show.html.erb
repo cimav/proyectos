@@ -47,8 +47,22 @@
     <div class="card card-link" data-href="<%= "#{project_url}" %>/mensajes">
       <div class="card-content">
         <div class="project-card-title title-mensajes">Mensajes</div>
-        <div class="project-card-icon center"><i class="material-icons large deep-orange-text">message</i></div>
-        <div class="project-card-initial-message">Publica anuncios, avances, ideas, etc. y compartelos con todos los involucrados.</div>
+        <% if @project.messages.count > 0 %>
+          <table class="messages-list-card">
+            <% @project.messages.where(status: Message::ACTIVE).order('created_at DESC').each do |msg| %>
+            <tr>
+              <td class="avatar-td"><img src="<%= msg.user.picture %>" class="circle responsive-img picture-32"></td>
+              <td>
+                <div class="message-meta"><%= msg.user.full_name %> • <%= f_date_no_time(msg.created_at) %></div>
+                <div class="message-content"><strong><%= msg.title %></strong> – <%= strip_tags(msg.content).truncate_words(5) %></a></div>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        <% else %>
+          <div class="project-card-icon center"><i class="material-icons large deep-orange-text">message</i></div>
+          <div class="project-card-initial-message">Publica anuncios, avances, ideas, etc. y compartelos con todos los involucrados.</div>
+        <% end %>
       </div>
     </div>
   </div>
