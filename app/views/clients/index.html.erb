@@ -7,6 +7,7 @@
     </div>
 </nav>
 
+<div class="admin-area z-depth-0">
 <table class="highlight bordered">
   <thead>
     <tr>
@@ -24,8 +25,8 @@
         <td><%= client.short_name %></td>
         <td><%= client.real_name %></td>
         <td><%= client.address %></td>
-        <td><%= client.company_size.name %></td>
-        <td><%= client.industry.name %></td>
+        <td><%= client.company_size.name rescue '--' %></td>
+        <td><%= client.industry.name rescue '--' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -35,6 +36,7 @@
 
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_client_path %>"><i class="material-icons">add</i></a>
+</div>
 </div>
 
 <script>
