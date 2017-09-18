@@ -33,11 +33,11 @@ class Project < ApplicationRecord
   end
 
   def budget
-    0
+    1200100
   end
 
   def budget_expended
-    0
+    budget / 3
   end
 
   def budget_obligated

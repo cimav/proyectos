@@ -5,9 +5,34 @@
     <div class="card card-link" data-href="<%= edit_project_path(@project) %>">
       <div class="card-content">
         <div class="project-card-title title-informacion">Información</div>
-        <strong><%= @project.project_status.name rescue '--' %></strong><br/>
-        Responsable: <%= @project.manager.full_name %><br/>
-        Agente: <%= @project.agent.full_name %>
+        <%
+        ps = ProjectStatus.where(project_type_id: @project.project_type_id).order('position')
+        ps_percent = (100 / (ps.count - 1)).round
+        ps_pos = 0
+        pp = 0
+        position_active = 0
+        ps.each do |p| 
+          pp = pp + 1
+          position_active = pp if p.id == @project.status
+        end
+        %>
+        <div class="status-line">
+          <% 
+          pp = 0 
+          ps.each do |p| %>
+            <%
+            pp = pp + 1
+            if pp <= position_active
+              c_active = ''
+            else  
+              c_active = 'circle-inactive' 
+            end
+            %>
+            <div class="circle <%= c_active %> ps_pos_<%= ps_pos %> tooltipped"  data-position="bottom" data-delay="50" data-tooltip="<%= p.name %>"></div>
+          <% ps_pos = ps_pos + ps_percent %>
+          <% end %>
+        </div>
+        <div class="status-legend"><%= @project.project_status.name rescue '--' %></div>
       </div>
     </div>
   </div>
@@ -16,7 +41,7 @@
     <div class="card">
       <div class="card-content">
         <div class="project-card-title title-presupuesto">Presupuesto</div>
-          <% if false %>
+          <% if true %>
             <% if @project.budget == 0 
                  budget_percentage = 100
                else
@@ -30,13 +55,13 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <p>
+            <p><br/><br/>
             Presupuesto: <%= number_to_currency(@project.budget) %><br/>
             Disponible: <%= number_to_currency(@project.budget_available) %><br/>
             Requisiciones: 0
             </p>
           <% else %>
-            <div class="project-card-icon center"><i class="material-icons large green-text">attach_money</i></div>
+            <div class="project-card-icon center"><i class="material-icons large deep-orange-text">attach_money</i></div>
             <div class="project-card-initial-message">Ve el estado del presupuesto de tu proyecto. Es necesario tener capturado el número de proyecto del sistema <strong>NetMultix</strong>.</div>
           <% end %>
       </div>
@@ -60,7 +85,7 @@
             <% end %>
           </table>
         <% else %>
-          <div class="project-card-icon center"><i class="material-icons large deep-orange-text">message</i></div>
+          <div class="project-card-icon center"><i class="material-icons large amber-text">message</i></div>
           <div class="project-card-initial-message">Publica anuncios, avances, ideas, etc. y compartelos con todos los involucrados.</div>
         <% end %>
       </div>
@@ -78,7 +103,7 @@
           <% end %>
           </ul>
         <% else %>
-          <div class="project-card-icon center"><i class="material-icons large amber-text">today</i></div>
+          <div class="project-card-icon center"><i class="material-icons large green-text">today</i></div>
           <div class="project-card-initial-message">Publica fechas importantes del proyecto.</div>
         <% end %>
       </div>

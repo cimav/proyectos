@@ -118,17 +118,17 @@ input#project_internal_name {
 }
 
 .card-informacion { border-top: 4px solid #e53935; }
-.card-mensajes  { border-top: 4px solid #ff7043; }
-.card-calendario    { border-top: 4px solid #ffab00; }
-.card-presupuesto { border-top: 4px solid #4caf50; }
+.card-presupuesto { border-top: 4px solid #ff7043; }
+.card-mensajes    { border-top: 4px solid #ffab00; }
+.card-calendario  { border-top: 4px solid #4caf50; }
 .card-servicios   { border-top: 4px solid #00bcd4; }
 .card-personas    { border-top: 4px solid #9c27b0; }
 .card-documentos  { border-top: 4px solid #ad1457; }
 
 .title-informacion { border-bottom: 2px solid #e53935; }
-.title-mensajes  { border-bottom: 2px solid #ff7043; }
-.title-calendario    { border-bottom: 2px solid #ffab00; }
-.title-presupuesto { border-bottom: 2px solid #4caf50; }
+.title-presupuesto { border-bottom: 2px solid #ff7043; }
+.title-mensajes    { border-bottom: 2px solid #ffab00; }
+.title-calendario  { border-bottom: 2px solid #4caf50; }
 .title-servicios   { border-bottom: 2px solid #00bcd4; }
 .title-personas    { border-bottom: 2px solid #9c27b0; }
 .title-documentos  { border-bottom: 2px solid #ad1457; }
@@ -211,7 +211,52 @@ input#messages_title {
 }
 
 
+.status-line {
+    width: calc(100% - 10px);
+    height: 2px;
+    background-color: #ddd;
+    position:relative;
+    margin: 4em 0 1em 0;
+    .circle {
+        display:inline-block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background: #ef5350;
+        left:0;
+        right:0;
+        border-radius: 100%;
+        top:-9px;
 
+
+    }
+    .circle-inactive {
+        background: #ffcdd2 !important;
+    }
+}
+
+.status-legend {
+  font-size: 140%;
+  font-weight: 500;
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+@for $j from 1 through 96 {
+  .ps_pos_#{$j} {
+    margin-left: calc(#{$j}%);
+  }
+}
+
+@for $j from 96 through 100 {
+  .ps_pos_#{$j} {
+    margin-left: calc(100% - 10px);
+  }
+}
+
+.ps_pos_0 {
+  margin-left: 0px !important;
+}
 
 
 
