@@ -93,13 +93,13 @@
   </div>
 
   <div class="col s12 m6 l4">
-    <div class="card">
+    <div class="card card-link" data-href="<%= "#{project_url}" %>/calendario">
       <div class="card-content">
         <div class="project-card-title title-calendario">Calendario</div>
         <% if @project.schedules.count > 0 %>
           <ul>
           <% @project.schedules.each do |sched| %>
-            <li><%= future_date(sched.end_date) %>: <%= sched.title %></li>
+            <li><%= sched.end_date %>: <%= sched.title %></li>
           <% end %>
           </ul>
         <% else %>

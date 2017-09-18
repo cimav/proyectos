@@ -1,0 +1,46 @@
+<%= form_with(model: schedule, local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+      <% schedule.errors.full_schedules.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.hidden_field :project_id, value: project.id %>
+  <div class="input-field field">
+    <%= form.text_field :title, id: :schedules_title, placeholder: 'Título...' %>
+  </div>
+  <div class="row">
+    <div class="col s12 m4 l4">
+      <input type="checkbox" id="all-day" checked="checked" />
+      <label for="all-day">Todo el día</label>
+    </div>
+    <div class="col s12 m4 l4 input-field field">
+      <label for="start-date">De</label>
+      <input type="text" id="start-date" class="datepicker">
+    </div>
+    <div class="col s12 m4 l4 input-field field">
+      <label for="end-date">a</label>
+      <input type="text" id="end-date" class="datepicker">
+    </div>
+  </div>
+  <%= form.trix_editor :content, height: 400  %>
+  <div class="schedule-button-area">
+    <%= form.submit 'Agregar evento', class: 'btn blue' %>
+  </div>
+<% end %>
+
+<script>
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Hoy',
+    clear: 'Limpiar',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+</script>

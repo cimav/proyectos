@@ -8,6 +8,9 @@ class Schedule < ApplicationRecord
     PROJECT_END   => "Fecha Termino"
   }
 
+  ACTIVE = 1
+  DELETED = 2
+
   def type_text
     TYPE_TEXT[schedule_type.to_i]
   end

@@ -1,0 +1,14 @@
+<div class="project-area-title">Calendario</div>
+<div class="project-area-actions"><a href="<%= "#{project_url}" %>/calendario/nuevo" class="btn blue">Agregar un evento</a></div>
+
+<table class="schedules-list">
+<% @project.schedules.where(status: Schedule::ACTIVE).order('created_at DESC').each do |sched| %>
+<tr>
+  <td class="avatar-td"><img src="<%= sched.user.picture %>" class="circle responsive-img picture-48"></td>
+  <td>
+    <div class="schedule-meta"><%= sched.user.full_name %> • <%= f_date(sched.created_at) %></div>
+    <div class="schedule-content"><a href="<%= "#{project_url}" %>/mensajes/<%= sched.id %>"><strong><%= sched.title %></strong> – <%= strip_tags(sched.content).truncate_words(40) %></a></div>
+  </td>
+</tr>
+<% end %>
+</table>

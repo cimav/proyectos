@@ -11,10 +11,10 @@
 <% if show_top_menu %>
 <table id="project-menu">
 <tr>
-<td><a class="waves-effect waves-light btn red darken-1" href="<%= edit_project_path(@project) %>">Información</a></td>
+<td><a class="waves-effect waves-light btn red darken-1 project-menu-active" href="<%= edit_project_path(@project) %>">Información</a></td>
 <td><a class="waves-effect waves-light btn deep-orange lighten-1" href="<%= edit_project_path(@project) %>">Presupuesto</a></td>
 <td><a class="waves-effect waves-light btn amber accent-4" href="<%= "#{project_url(@project)}" %>/mensajes">Mensajes</a></td>
-<td><a class="waves-effect waves-light btn green" href="<%= edit_project_path(@project) %>">Calendario</a></td>
+<td><a class="waves-effect waves-light btn green" href="<%= "#{project_url(@project)}" %>/calendario">Calendario</a></td>
 <td><a class="waves-effect waves-light btn cyan" href="<%= edit_project_path(@project) %>">Servicios</a></td>
 <td><a class="waves-effect waves-light btn purple" href="<%= edit_project_path(@project) %>">Personas</a></td>
 <td><a class="waves-effect waves-light btn pink darken-3" href="<%= edit_project_path(@project) %>">Documentos</a></td>

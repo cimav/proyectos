@@ -15,6 +15,11 @@ Rails.application.routes.draw do
         get :new_message, :path => "mensajes/nuevo"
         get :show_message, :path => "mensajes/:message_id"
         get :edit_message, :path => "mensajes/:message_id/editar"
+
+        get :schedules, :path => "calendario"
+        get :new_schedule, :path => "calendario/nuevo"
+        get :show_schedule, :path => "calendario/:schedule_id"
+        get :edit_schedule, :path => "calendario/:schedule_id/editar"
       end
     end   
   end

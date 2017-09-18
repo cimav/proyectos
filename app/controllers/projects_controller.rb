@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :auth_required
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule]
 
   # GET /projects
   # GET /projects.json
@@ -80,6 +80,22 @@ class ProjectsController < ApplicationController
   def edit_message
     @message = @project.messages.find(params[:message_id])
   end  
+
+  def schedules
+  end
+
+  def new_schedule
+    @schedule = @project.schedules.new
+  end
+
+  def show_schedule
+    @schedule = @project.schedules.find(params[:schedule_id])
+  end
+
+  def edit_schedule
+    @schedule = @project.schedules.find(params[:schedule_id])
+  end  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

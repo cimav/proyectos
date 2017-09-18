@@ -25,27 +25,32 @@ class SchedulesController < ApplicationController
   # POST /schedules.json
   def create
     @schedule = Schedule.new(schedule_params)
+    @schedule.user_id = current_user.id
+    @schedule.status = Schedule::ACTIVE
+    @project = @schedule.project
 
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
+        format.html { redirect_to schedules_project_url(@project), notice: 'Evento agregado.' }
         format.json { render :show, status: :created, location: @schedule }
       else
-        format.html { render :new }
+        format.html { render "projects/new_schedule", schedule: @schedule, project: @project, notice: 'No se pudo agregar.'}
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
   end
 
+
   # PATCH/PUT /schedules/1
   # PATCH/PUT /schedules/1.json
   def update
+    @project = @schedule.project
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
+        format.html { redirect_to schedules_project_url(@project), notice: 'Evento actualizado.' }
         format.json { render :show, status: :ok, location: @schedule }
       else
-        format.html { render :edit }
+        format.html { render "projects/edit_schedule", schedule: @schedule, project: @project, notice: 'No se pudo actualizar.'}
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
