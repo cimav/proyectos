@@ -17,18 +17,39 @@
   </div>
 
   <div class="field">
+    <%= form.label :project_type_id, "Tipo de proyecto" %>
+    <%= form.collection_select :project_type_id, ProjectType.all, :id, :name  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :research_type, "Tipo de investigación" %>
+    <% research_type_array = Project::RESEARCH_TYPE.invert %>
+    <%= form.select :research_type, options_for_select(research_type_array, project.research_type) %>
+  </div>
+
+  <div class="field">
     <%= form.label :client_id, "Cliente" %>
     <%= form.collection_select :client_id, Client.all, :id, :short_name  %>
   </div>
 
   <div class="input-field field">
-    <%= form.label :number, "Identificador de proyecto" %>
+    <%= form.label :erp_number, "Identificador interno de proyecto (NetMultix)" %>
+    <%= form.text_field :erp_number, id: :project_erp_number %>
+  </div>
+
+  <div class="input-field field">
+    <%= form.label :number, "Identificador externo de proyecto (e.g. Número CONACYT)" %>
     <%= form.text_field :number, id: :project_number %>
   </div>
 
   <div class="input-field field">
     <%= form.label :goal, "Objetivo" %>
     <%= form.text_area :goal, id: :project_goal, class: 'materialize-textarea' %>
+  </div>
+
+  <div class="input-field field">
+    <%= form.label :results, "Resultados Esperados" %>
+    <%= form.text_area :results, id: :project_results, class: 'materialize-textarea' %>
   </div>
 
   <div class="field">
@@ -50,12 +71,6 @@
     <%= form.label :business_unit_id, "Sede" %>
     <%= form.collection_select :business_unit_id, BusinessUnit.all, :id, :name  %>
   </div>
-
-  <div class="field">
-    <%= form.label :project_type_id, "Tipo de proyecto" %>
-    <%= form.collection_select :project_type_id, ProjectType.all, :id, :name  %>
-  </div>
-
 
   <div class="actions">
     <%= form.submit 'Guardar', class: 'btn blue' %>

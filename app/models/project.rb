@@ -12,6 +12,21 @@ class Project < ApplicationRecord
 
   before_validation :set_extra, on: :create
 
+  RESEARCH_BASIC   = 1
+  RESEARCH_APPLIED = 2
+  RESEARCH_TECH    = 3
+
+  RESEARCH_TYPE = {
+    RESEARCH_BASIC   => "Básica",
+    RESEARCH_APPLIED => "Aplicada",
+    RESEARCH_TECH    => "Desarrollo Tecnológico"
+  }
+
+
+  def research_text
+    RESEARCH_TYPE[research_type.to_i]
+  end
+
 
   def sale_price
     0

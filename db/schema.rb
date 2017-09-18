@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914205429) do
+ActiveRecord::Schema.define(version: 20170918143836) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -196,6 +196,9 @@ ActiveRecord::Schema.define(version: 20170914205429) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "results"
+    t.string "erp_number"
+    t.integer "research_type"
     t.index ["client_id"], name: "index_projects_on_client_id"
   end
 
