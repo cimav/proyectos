@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918223224) do
+ActiveRecord::Schema.define(version: 20170921165736) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 20170918223224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"
+    t.boolean "all_day"
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end

@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col s12 m6 l6 input-field field">
       <label for="start-date">De</label>
-      <input type="text" id="start-date-date" class="datepicker">
+      <input type="text" id="start_date_date" name="start_date_date" class="datepicker">
     </div>
     <div class="col s12 m2 l2 input-field field event-hours">
       <% 
@@ -27,26 +27,29 @@
         hours_array[h.to_s + ':30'] = h.to_s + ':00'
       end 
       %>
-      <%= select_tag 'start-date-hours', options_for_select(hours_array, '00:00') %>
+      <%= select_tag 'start_date_hours', options_for_select(hours_array, '00:00') %>
     </div>
   </div>
   <div class="row">
     <div class="col s12 m6 l6 input-field field">
       <label for="start-date">A</label>
-      <input type="text" id="end-date-date" class="datepicker">
+      <input type="text" id="end_date_date" name="end_date_date" class="datepicker">
     </div>
     <div class="col s12 m2 l2 input-field field event-hours">
-      <%= select_tag 'end-date-hours', options_for_select(hours_array, '00:00') %>
+      <%= select_tag 'end_date_hours', options_for_select(hours_array, '00:00') %>
     </div>
   </div>
   <div class="row">
     <div class="col s12">
-      <input type="checkbox" id="all-day" checked="checked" />
-      <label for="all-day">Todo el día</label>
+       <%= form.check_box :all_day, id: :schedules_all_day %>
+      <label for="all_day">Todo el día</label>
     </div>
   </div>
-  
-  <%= form.trix_editor :content, height: 400  %>
+  <div class="row">
+    <div class="col s12 input-field field">
+      <%= form.trix_editor :content, height: 400  %>
+    </div>
+  </div>
   <div class="schedule-button-area">
     <%= form.submit 'Agregar evento', class: 'btn blue' %>
   </div>
@@ -64,8 +67,8 @@ $(function() {
     });
   $('.event-hours').hide();
 
-  $(document).on('change', '#all-day', function() {
-    if ($('#all-day').is(':checked')) {
+  $(document).on('change', '#schedules_all_day', function() {
+    if ($('#schedules_all_day').is(':checked')) {
       $('.event-hours').hide();  
     } else {
       $('.event-hours').show();
