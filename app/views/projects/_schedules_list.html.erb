@@ -1,0 +1,40 @@
+<table class="schedules-list <%= table_class %>">
+<% schedules_list.each do |sched| %>
+<tr>
+  <% if sched.start_date.strftime('%Y-%m-%d') == sched.end_date.strftime('%Y-%m-%d') %>
+    <td class="calendar-td"></td>
+    <td class="calendar-td">
+  	  <div class="card calendar-card">
+  	    <div class="month"><%= sched.start_date.strftime('%b') %></div>
+  	    <div class="day"><%= sched.start_date.strftime('%d') %></div>
+  	  </div>	  	
+    </td>
+    <td class="calendar-td"></td>
+  <% else %>
+    <td class="calendar-td">
+      <div class="card calendar-card">
+  	    <div class="month"><%= sched.start_date.strftime('%b') %></div>
+  	    <div class="day"><%= sched.start_date.strftime('%d') %></div>
+  	  </div>
+    </td>
+    <td class="calendar-td"><i class="material-icons grey-text">arrow_forward</i></td>
+    <td class="calendar-td">
+  	  <div class="card calendar-card">
+  	    <div class="month"><%= sched.end_date.strftime('%b') %></div>
+  	    <div class="day"><%= sched.end_date.strftime('%d') %></div>
+  	  </div>	  	
+    </td>
+  <% end %>
+  <td class="calendar-data">
+    <div class="schedule-title"><a href="<%= "#{project_url}" %>/calendario/<%= sched.id %>"><strong><%= sched.title %></strong></a></div>
+    <div class="schedule-meta">
+      <% if !sched.all_day && sched.start_date.strftime('%Y-%m-%d') == sched.end_date.strftime('%Y-%m-%d') %>
+        <%= f_date(sched.created_at) %>
+         •
+      <% end %>
+      Creado por: <%= sched.user.full_name %>
+    </div>
+  </td>
+</tr>
+<% end %>
+</table>

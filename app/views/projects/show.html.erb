@@ -96,15 +96,27 @@
     <div class="card card-link" data-href="<%= "#{project_url}" %>/calendario">
       <div class="card-content">
         <div class="project-card-title title-calendario">Calendario</div>
-        <% if @project.schedules.count > 0 %>
-          <ul>
-          <% @project.schedules.each do |sched| %>
-            <li><%= sched.end_date %>: <%= sched.title %></li>
-          <% end %>
-          </ul>
+        <% max_scheds = 3 %>
+        <% @schedules_list = @project.schedules.where(status: Schedule::ACTIVE).where('DATE(start_date) >= DATE(NOW()) OR DATE(end_date) >= DATE(NOW())').order('start_date ASC, end_date ASC').limit(max_scheds) %>    
+        <% if @schedules_list.count > 0 %>
+          <table class="calendar-home">
+            <%= render 'projects/schedules_list_home', project: @project, schedules_list: @schedules_list, row_class: 'upcoming' %>
+            <% if @schedules_list.count < max_scheds %>
+              <% @schedules_past_list = @project.schedules.where(status: Schedule::ACTIVE).where('start_date <= NOW() AND NOT ( DATE(start_date) >= DATE(NOW()) OR DATE(end_date) >= DATE(NOW()) ) ').order('start_date DESC').limit(max_scheds - @schedules_list.count) %>
+              <%= render 'projects/schedules_list_home', project: @project, schedules_list: @schedules_past_list, row_class: 'past-events' %>
+            <% end %>
+          </table>
         <% else %>
-          <div class="project-card-icon center"><i class="material-icons large green-text">today</i></div>
-          <div class="project-card-initial-message">Publica fechas importantes del proyecto.</div>
+
+          <% @schedules_past_list = @project.schedules.where(status: Schedule::ACTIVE).where('start_date <= NOW() AND NOT ( DATE(start_date) >= DATE(NOW()) OR DATE(end_date) >= DATE(NOW()) ) ').order('start_date DESC').limit(max_scheds) %>
+          <% if @schedules_past_list.count > 0 %>
+            <table class="calendar-home">    
+            <%= render 'projects/schedules_list_home', project: @project, schedules_list: @schedules_past_list, row_class: 'past-events' %>
+            </table>
+          <% else %>
+            <div class="project-card-icon center"><i class="material-icons large green-text">today</i></div>
+            <div class="project-card-initial-message">Publica fechas importantes del proyecto.</div>
+          <% end %>
         <% end %>
       </div>
     </div>

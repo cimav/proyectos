@@ -1,14 +1,16 @@
 <div class="project-area-title">Calendario</div>
 <div class="project-area-actions"><a href="<%= "#{project_url}" %>/calendario/nuevo" class="btn blue">Agregar un evento</a></div>
-
-<table class="schedules-list">
-<% @project.schedules.where(status: Schedule::ACTIVE).order('created_at DESC').each do |sched| %>
-<tr>
-  <td class="avatar-td"><img src="<%= sched.user.picture %>" class="circle responsive-img picture-48"></td>
-  <td>
-    <div class="schedule-meta"><%= sched.user.full_name %> • <%= f_date(sched.created_at) %></div>
-    <div class="schedule-content"><a href="<%= "#{project_url}" %>/calendario/<%= sched.id %>"><strong><%= sched.title %></strong> – <%= strip_tags(sched.content).truncate_words(40) %></a></div>
-  </td>
-</tr>
+<div class="spacer-2em"></div>
+<% @schedules_list = @project.schedules.where(status: Schedule::ACTIVE).where('DATE(start_date) >= DATE(NOW()) OR DATE(end_date) >= DATE(NOW())').order('start_date ASC, end_date ASC') %>
+<% if @schedules_list.count > 0 %>
+  <h4>Próximos eventos</h4>
+  <%= render 'projects/schedules_list', project: @project, schedules_list: @schedules_list, table_class: 'upcoming-events' %>
+  <div class="spacer-2em"></div>
 <% end %>
-</table>
+
+<% @schedules_list = @project.schedules.where(status: Schedule::ACTIVE).where('start_date <= NOW() AND NOT ( DATE(start_date) >= DATE(NOW()) OR DATE(end_date) >= DATE(NOW()) ) ').order('start_date DESC') %>
+<% if @schedules_list.count > 0 %>
+  <h4>Eventos pasados</h4>
+  <%= render 'projects/schedules_list', project: @project, schedules_list: @schedules_list, table_class: 'past-events' %>
+<% end %>
+

@@ -1,0 +1,29 @@
+<% schedules_list.each do |sched| %>
+  <tr class="<%= row_class %>">
+  <% if sched.start_date.strftime('%Y-%m-%d') == sched.end_date.strftime('%Y-%m-%d') %>
+    <td class="cal-home-td"></td>
+    <td class="cal-home-td">
+      <div class="card calendar-card-home">
+    	  <div class="month"><%= sched.start_date.strftime('%b') %></div>
+    	  <div class="day"><%= sched.start_date.strftime('%d') %></div>
+    	</div>	  	
+    </td>
+    <td class="cal-home-td"></td>
+  <% else %>
+    <td class="cal-home-td">
+      <div class="card calendar-card-home">
+  	    <div class="month"><%= sched.start_date.strftime('%b') %></div>
+  	    <div class="day"><%= sched.start_date.strftime('%d') %></div>
+  	  </div>
+    </td>
+    <td class="cal-home-td"><i class="material-icons grey-text">arrow_forward</i></td>
+    <td class="cal-home-td">
+      <div class="card calendar-card-home">
+    	  <div class="month"><%= sched.end_date.strftime('%b') %></div>
+    	  <div class="day"><%= sched.end_date.strftime('%d') %></div>
+    	</div>
+    </td>
+  <% end %>
+  <td class="cal-home-title"><strong><%= sched.title %></strong></td>
+  </tr>
+<% end %>
