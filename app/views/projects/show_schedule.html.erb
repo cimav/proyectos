@@ -1,0 +1,10 @@
+<%= render 'header', project: @project, show_top_menu: true %>
+<div class="project-area z-depth-1">
+  <div class="show-schedule">
+    <div class="schedule-title"><%= @schedule.title %></div>
+    <div class="schedule-content"><%= @schedule.content.html_safe %></div>
+    <div class="fixed-action-btn">
+      <a href="<%= edit_schedule_project_url(schedule_id: @schedule.id) %>" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a>
+    </div>
+  </div>
+</div>

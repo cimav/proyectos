@@ -15,34 +15,37 @@
     <%= form.text_field :title, id: :schedules_title, placeholder: 'Título...' %>
   </div>
   <div class="row">
+    <div class="col s12">
+      <%= form.check_box :all_day, id: :schedules_all_day %> 
+      <label for="schedules_all_day">Todo el día</label>
+    </div>
+  </div>
+  <div class="row">
     <div class="col s12 m6 l6 input-field field">
       <label for="start-date">De</label>
-      <input type="text" id="start_date_date" name="start_date_date" class="datepicker">
+      <input type="text" id="start_date_date" name="start_date_date" class="datepicker" value="<%= schedule.start_date.strftime '%Y-%m-%d' rescue '' %>">
     </div>
     <div class="col s12 m2 l2 input-field field event-hours">
       <% 
       hours_array = {}
       24.times do |h|
-        hours_array[h.to_s + ':00'] = h.to_s + ':00'
-        hours_array[h.to_s + ':30'] = h.to_s + ':00'
+        hh = h.to_s.rjust(2, '0')
+        hours_array[hh + ':00'] = hh + ':00'
+        hours_array[hh + ':30'] = hh + ':30'
       end 
+      start_hours_value = schedule.start_date.strftime('%H:%M') rescue '00:00'
       %>
-      <%= select_tag 'start_date_hours', options_for_select(hours_array, '00:00') %>
+      <%= select_tag 'start_date_hours', options_for_select(hours_array, start_hours_value) %>
     </div>
   </div>
   <div class="row">
     <div class="col s12 m6 l6 input-field field">
       <label for="start-date">A</label>
-      <input type="text" id="end_date_date" name="end_date_date" class="datepicker">
+      <input type="text" id="end_date_date" name="end_date_date" class="datepicker" value="<%= schedule.end_date.strftime '%Y-%m-%d' rescue '' %>">
     </div>
     <div class="col s12 m2 l2 input-field field event-hours">
-      <%= select_tag 'end_date_hours', options_for_select(hours_array, '00:00') %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-       <%= form.check_box :all_day, id: :schedules_all_day %>
-      <label for="all_day">Todo el día</label>
+      <% end_hours_value = schedule.end_date.strftime('%H:%M') rescue '00:00' %>
+      <%= select_tag 'end_date_hours', options_for_select(hours_array, end_hours_value)  %>
     </div>
   </div>
   <div class="row">
@@ -51,13 +54,14 @@
     </div>
   </div>
   <div class="schedule-button-area">
-    <%= form.submit 'Agregar evento', class: 'btn blue' %>
+    <%= form.submit save_button, class: 'btn blue' %>
   </div>
 <% end %>
 
 <script>
 $(function() {
   $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15, // Creates a dropdown of 15 years to control year,
       today: 'Hoy',
@@ -75,5 +79,12 @@ $(function() {
     }
     
   });
+
+  <% if schedule.all_day %>
+    $('.event-hours').hide();
+  <% else %>
+    $('.event-hours').show();
+  <% end %>
+
 });
 </script>

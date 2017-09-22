@@ -29,25 +29,10 @@ class SchedulesController < ApplicationController
     @schedule.status = Schedule::ACTIVE
     @project = @schedule.project
 
-    puts "xxxxxxxx"
-    puts @schedule.all_day
-    puts "------------"
-    @schedule.all_day = 6
-    puts @schedule.all_day
-    puts "PARAMMMMSSSS"
-    puts params[:all_day]
-
-    if (params[:all_day] == 'true') 
-      @schedule.all_day = true
-      puts "zzzzzzzzzz"
-      puts @schedule.all_day
-
+    if (params[:all_day]) 
       start_date = params[:start_date_date].to_s +  ' 00:00:00'
       end_date = params[:end_date_date].to_s +  ' 00:00:00'
     else
-      @schedule.all_day = false
-      puts "ffffffff"
-      puts @schedule.all_day
       start_date = params[:start_date_date].to_s +  ' ' + params['start_date_hours']
       end_date = params[:end_date_date].to_s +  ' ' + params['end_date_hours']
     end
@@ -71,6 +56,18 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1.json
   def update
     @project = @schedule.project
+
+    if (params[:all_day]) 
+      start_date = params[:start_date_date].to_s +  ' 00:00:00'
+      end_date = params[:end_date_date].to_s +  ' 00:00:00'
+    else
+      start_date = params[:start_date_date].to_s +  ' ' + params['start_date_hours']
+      end_date = params[:end_date_date].to_s +  ' ' + params['end_date_hours']
+    end
+
+    @schedule.start_date = start_date
+    @schedule.end_date = end_date
+    
     respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to schedules_project_url(@project), notice: 'Evento actualizado.' }
