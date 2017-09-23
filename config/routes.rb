@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         get :new_schedule, :path => "calendario/nuevo"
         get :show_schedule, :path => "calendario/:schedule_id"
         get :edit_schedule, :path => "calendario/:schedule_id/editar"
+
+        get :files, :path => "documentos"
       end
     end   
   end
