@@ -17,3 +17,4 @@
 //= require trix
 //= require_tree .
 //= require materialize-sprockets
+//= require dropzone

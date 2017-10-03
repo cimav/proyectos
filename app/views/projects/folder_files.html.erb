@@ -1,0 +1,49 @@
+<%= render 'header', project: @project, show_top_menu: true %>
+<div class="project-area z-depth-1">
+  <div class="project-area-title">Documentos y Archivos</div>
+
+  <div class="row docs-area">
+    <div class="col s4 m4 docs-folders">
+      <table class="highlight">
+        <tr><th colspan="2">Carpetas</th></tr>
+        <% @project.project_folders.order(:name).each do |folder| %>
+          <% folder_selected = @project_folder.id.to_i == folder.id.to_i ? "folder-selected" : "" %>
+          <tr class="tr-link <%= folder_selected %>" data-href="<%= "#{project_url}/documentos/#{folder.id}" %>"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-3">folder</i></td><td><a href="#"><%= folder.name %></a></td></tr>
+        <% end %>
+         <tr class="new-folder-row"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-4">create_new_folder</i></td><td><a href="#">Crear nueva carpeta</a></td></tr>
+      </table>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col s8 m8 docs-files">
+      <div id="files-area">
+        <%= render 'projects/files_list', project_folder: @project_folder %>
+      </div>
+      <div class="files-upload-area">
+        <form action="<%= project_files_path %>" class="dropzone" id="files-dropzone">
+          <input type="hidden" name="project_file[project_folder_id]" value="<%= @project_folder.id %>">
+        </form>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  function reloadFilesArea() {
+    $.get('<%= "#{project_url}/documentos/#{@project_folder.id}/listado" %>',
+      function (data) {
+        $('#files-area').html(data)  
+      }
+    );
+  }
+
+  Dropzone.options.filesDropzone = {
+    paramName: "project_file[file]", // The name that will be used to transfer the file
+    dictDefaultMessage: "Para subir archivos, da click o arrastralos aquí.",
+    complete: function(file) {
+      this.removeFile(file);
+      reloadFilesArea();
+    }
+  };
+</script>

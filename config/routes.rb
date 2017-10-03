@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/login' => 'login#index'
 
 
-  scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
+  scope(:path_names => { :new => "nuevo", :edit => "editar", :create => "crear", :delete => "eliminar" }) do
+    resources :project_files, :path=>'archivos'
     resources :projects, :path => "proyectos"  do
       member do
         get :messages, :path => "mensajes"
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
         get :edit_schedule, :path => "calendario/:schedule_id/editar"
 
         get :files, :path => "documentos"
+        get :folder_files, :path => "documentos/:project_folder_id"
+        get :folder_files_list, :path => "documentos/:project_folder_id/listado"
       end
     end   
   end
@@ -47,12 +50,14 @@ Rails.application.routes.draw do
     end 
   end
 
+
+
   resources :business_units
   resources :schedules
   resources :messages
   resources :departments
   resources :project_folders
-  resources :project_files
+  
   resources :industries
   resources :people
   resources :institutions

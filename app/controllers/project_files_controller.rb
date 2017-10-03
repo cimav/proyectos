@@ -25,6 +25,10 @@ class ProjectFilesController < ApplicationController
   # POST /project_files.json
   def create
     @project_file = ProjectFile.new(project_file_params)
+    @project_file.user_id = current_user.id
+    
+    f = params[:project_file][:file]
+    @project_file.name = f.original_filename rescue 'Sin nombre'
 
     respond_to do |format|
       if @project_file.save
@@ -69,6 +73,6 @@ class ProjectFilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_file_params
-      params.require(:project_file).permit(:name, :project_folder_id, :description, :user_id)
+      params.require(:project_file).permit(:name, :project_folder_id, :description, :user_id, :file)
     end
 end

@@ -1,0 +1,19 @@
+<table class="highlight">
+  <tr>
+    <th colspan="2">Nombre</th>
+    <th class="file-date">Fecha</th>
+    <th class="file-size">Tamaño</th>
+    <th class="file-by">Por</th>
+    <th></th>
+  </tr>
+  <% project_folder.project_files.order(:name).each do |file| %>
+    <tr>
+      <td class="file-type tr-link-nw" data-href="<%= file.file.to_s %>""><div class="file-ico"><div class="file-ico-inner <%= file.ext %>-ico"><%= file.ext %></div></div></td>
+      <td class="file-name tr-link-nw" data-href="<%= file.file.to_s %>"><%= file.name %></td>
+      <td class="file-date tr-link-nw" data-href="<%= file.file.to_s %>"><%= f_date(file.created_at) %></td>
+      <td class="file-size tr-link-nw" data-href="<%= file.file.to_s %>"><%= number_to_human_size(file.size) %></td>
+      <td class="file-by tr-link-nw" data-href="<%= file.file.to_s %>"><img src="<%= file.user.picture %>" class="circle tooltipped"  data-position="bottom" data-delay="50" data-tooltip="<%= file.user.full_name %>"></td>
+      <td class="file-actions"><a class="file-delete tooltipped"  data-position="bottom" data-delay="50" data-tooltip="Eliminar archivo" data-file-id="<%= file.id %>""><i class="material-icons tiny grey-text">cancel</i></a></td>
+    </tr>
+  <% end %>
+</table>

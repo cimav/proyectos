@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :auth_required
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule, :files]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule, :files, :folder_files, :folder_files_list]
 
   # GET /projects
   # GET /projects.json
@@ -97,6 +97,18 @@ class ProjectsController < ApplicationController
   end  
 
   def files
+    # Redirect to first folder
+    first = @project.project_folders.order(:name).first 
+    redirect_to action: "folder_files", id: @project.id, project_folder_id: first.id
+  end
+
+  def folder_files
+    @project_folder = @project.project_folders.find(params[:project_folder_id]) 
+  end
+
+  def folder_files_list
+    @project_folder = @project.project_folders.find(params[:project_folder_id]) 
+    render layout: false
   end
 
 

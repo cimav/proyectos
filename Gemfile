@@ -42,6 +42,7 @@ gem 'materialize-sass'
 gem 'compass-rails'
 gem 'trix'
 gem 'dropzonejs-rails'
+gem 'carrierwave', '~> 1.0'
 
 gem 'omniauth-google-oauth2'
 gem 'audited'
