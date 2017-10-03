@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921165736) do
+ActiveRecord::Schema.define(version: 20171002233027) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20170921165736) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "project_id"
     t.index ["user_id"], name: "index_project_folders_on_user_id"
   end
 
