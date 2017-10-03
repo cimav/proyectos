@@ -41,6 +41,7 @@ gem 'jquery-ui-rails'
 gem 'materialize-sass'
 gem 'compass-rails'
 gem 'trix'
+gem 'dropzonejs-rails'
 
 gem 'omniauth-google-oauth2'
 gem 'audited'
