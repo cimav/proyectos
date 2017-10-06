@@ -28,8 +28,8 @@ class ProjectFilesController < ApplicationController
     @project_file.user_id = current_user.id
     
     f = params[:project_file][:file]
-    @project_file.name = f.original_filename rescue 'Sin nombre'
 
+    @project_file.name = f.original_filename rescue 'Sin nombre'
     respond_to do |format|
       if @project_file.save
         format.html { redirect_to @project_file, notice: 'Project file was successfully created.' }
@@ -58,9 +58,13 @@ class ProjectFilesController < ApplicationController
   # DELETE /project_files/1
   # DELETE /project_files/1.json
   def destroy
+    project_id = @project_file.project_folder.project_id
+    folder_id = @project_file.project_folder_id
+    url = url_for(action: 'folder_files', controller: 'projects', :project_folder_id => folder_id, id: project_id)
+
     @project_file.destroy
     respond_to do |format|
-      format.html { redirect_to project_files_url, notice: 'Project file was successfully destroyed.' }
+      format.html { redirect_to url, notice: 'Archivo eliminado.' }
       format.json { head :no_content }
     end
   end

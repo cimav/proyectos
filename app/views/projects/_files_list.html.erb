@@ -13,7 +13,11 @@
       <td class="file-date tr-link-nw" data-href="<%= file.file.to_s %>"><%= f_date(file.created_at) %></td>
       <td class="file-size tr-link-nw" data-href="<%= file.file.to_s %>"><%= number_to_human_size(file.size) %></td>
       <td class="file-by tr-link-nw" data-href="<%= file.file.to_s %>"><img src="<%= file.user.picture %>" class="circle tooltipped"  data-position="bottom" data-delay="50" data-tooltip="<%= file.user.full_name %>"></td>
-      <td class="file-actions"><a class="file-delete tooltipped"  data-position="bottom" data-delay="50" data-tooltip="Eliminar archivo" data-file-id="<%= file.id %>""><i class="material-icons tiny grey-text">cancel</i></a></td>
+      <td class="file-actions">
+        <%= link_to file, method: :delete, data: { confirm: '¿Desea borrar el archivo?' }, remote: true, "class" => "file-delete tooltipped", "data-position" => "bottom", "data-delay" => "50", "data-tooltip" => "Eliminar archivo" do  %>
+          <i class="material-icons tiny grey-text">cancel</i>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
