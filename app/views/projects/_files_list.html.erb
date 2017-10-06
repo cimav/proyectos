@@ -14,10 +14,23 @@
       <td class="file-size tr-link-nw" data-href="<%= file.file.to_s %>"><%= number_to_human_size(file.size) %></td>
       <td class="file-by tr-link-nw" data-href="<%= file.file.to_s %>"><img src="<%= file.user.picture %>" class="circle tooltipped"  data-position="bottom" data-delay="50" data-tooltip="<%= file.user.full_name %>"></td>
       <td class="file-actions">
-        <%= link_to file, method: :delete, data: { confirm: '¿Desea borrar el archivo?' }, remote: true, "class" => "file-delete tooltipped", "data-position" => "bottom", "data-delay" => "50", "data-tooltip" => "Eliminar archivo" do  %>
-          <i class="material-icons tiny grey-text">cancel</i>
-        <% end %>
+        <a class="file-delete" data-project-id="<%= project_folder.project_id %>" data-project-folder-id="<%= project_folder.id %>" data-project-folder-file-id="<%= file.id %>"><i class="material-icons tiny grey-text">cancel</i></a>
       </td>
     </tr>
   <% end %>
 </table>
+<div id="aaa" style="white-space: pre;"></div>
+
+<script type="text/javascript">
+  $(document).on('click', '.file-delete', function() {
+    if (confirm('¿Eliminar archivo?')) {
+      $.ajax({
+        url: "/archivos/" + $(this).data('project-folder-file-id'),
+        type: 'DELETE'
+      });  
+    }
+    
+  });
+</script>
+
+

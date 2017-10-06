@@ -12,12 +12,12 @@
 <table id="project-menu">
 <tr>
 <td><a class="waves-effect waves-light menu-item red darken-1" href="<%= edit_project_path(@project) %>">Información</a></td>
-<td><a class="waves-effect waves-light menu-item deep-orange lighten-1" href="<%= edit_project_path(@project) %>">Presupuesto</a></td>
+<td><a class="waves-effect waves-light menu-item deep-orange lighten-1" href="<%= "#{project_url(@project)}" %>/presupuesto">Presupuesto</a></td>
 <td><a class="waves-effect waves-light menu-item amber accent-4" href="<%= "#{project_url(@project)}" %>/mensajes">Mensajes</a></td>
 <td><a class="waves-effect waves-light menu-item green" href="<%= "#{project_url(@project)}" %>/calendario">Calendario</a></td>
-<td><a class="waves-effect waves-light menu-item cyan" href="<%= edit_project_path(@project) %>">Servicios</a></td>
-<td><a class="waves-effect waves-light menu-item purple" href="<%= edit_project_path(@project) %>">Personas</a></td>
-<td><a class="waves-effect waves-light menu-item pink darken-3" href="<%= edit_project_path(@project) %>">Documentos</a></td>
+<td><a class="waves-effect waves-light menu-item cyan" href="<%= "#{project_url(@project)}" %>/servicios">Servicios</a></td>
+<td><a class="waves-effect waves-light menu-item purple" href="<%= "#{project_url(@project)}" %>/personas">Personas</a></td>
+<td><a class="waves-effect waves-light menu-item pink darken-3" href="<%= "#{project_url(@project)}" %>/documentos">Documentos</a></td>
 </tr>
 </table>
 <% end %>
