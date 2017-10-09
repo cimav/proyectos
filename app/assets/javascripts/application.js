@@ -18,3 +18,14 @@
 //= require_tree .
 //= require materialize-sprockets
 //= require dropzone
+
+$(document).on('ready turbolinks:load', function() {
+  $(".dropdown-button").dropdown();
+  $('select').material_select();
+  $(".tr-link").click(function() {
+    window.location = $(this).data("href");
+  });
+  $(".tr-link-nw").click(function() {
+    window.open($(this).data("href"));
+  });
+});

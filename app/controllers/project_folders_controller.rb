@@ -25,6 +25,8 @@ class ProjectFoldersController < ApplicationController
   # POST /project_folders.json
   def create
     @project_folder = ProjectFolder.new(project_folder_params)
+    @project_folder.user_id = current_user.id
+
 
     respond_to do |format|
       if @project_folder.save

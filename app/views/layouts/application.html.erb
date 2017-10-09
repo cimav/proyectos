@@ -52,16 +52,6 @@
     <div class="container">
       <%= yield %>
     </div>
-    <script>
-      $(".dropdown-button").dropdown();
-      $('select').material_select();
-      $(".tr-link").click(function() {
-        window.location = $(this).data("href");
-      });
-      $(".tr-link-nw").click(function() {
-        window.open($(this).data("href"));
-      });
-    </script>
   </body>
 </html>
 
