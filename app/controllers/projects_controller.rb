@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :auth_required
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule, :files, :folder_files, :folder_files_list]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule, :files, :folder_files, :folder_files_list, :folders]
 
   # GET /projects
   # GET /projects.json
@@ -109,6 +109,41 @@ class ProjectsController < ApplicationController
   def folder_files_list
     @project_folder = @project.project_folders.find(params[:project_folder_id]) 
     render layout: false
+  end
+
+  def folders
+    render layout: false
+  end
+
+  def add_folder
+    folder = @project.project_folders.new
+    folder.name = params[:new_folder]
+    folder.user_id = 72
+    respond_to do |format|
+      if folder.save
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:new_status_id] = folder.id
+            json[:flash] = 'Nueva carpeta guardada'
+            render :json => json
+          else
+            redirect_to @project_type
+          end
+        end
+      else
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:flash] = 'Error al guardar'
+            json[:errors] = folder.errors
+            render :json => json, :status => :unprocessable_entity
+          else
+            redirect_to @project_type
+          end
+        end
+      end
+    end
   end
 
 

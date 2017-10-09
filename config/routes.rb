@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get "/logout" => 'sessions#destroy'
   get '/login' => 'login#index'
-
+  post '/crear-carpeta' => 'project_folders#add_folder'
 
   scope(:path_names => { :new => "nuevo", :edit => "editar", :create => "crear", :delete => "eliminar" }) do
     resources :project_files, :path=>'archivos'
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get :edit_schedule, :path => "calendario/:schedule_id/editar"
 
         get :files, :path => "documentos"
+        get :folders, :path => "documentos/carpetas"
         get :folder_files, :path => "documentos/:project_folder_id"
         get :folder_files_list, :path => "documentos/:project_folder_id/listado"
       end
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
         member do
           post "reorder-status"
           post "add-status"
+          post "add-folder"
           post "update-status"
           get  "statuses"
         end
@@ -46,7 +48,6 @@ Rails.application.routes.draw do
       resources :company_sizes, :path => "company_sizes"   
       resources :departments, :path => "departamentos"   
       resources :clients, :path => "clientes"   
-      resources :project_types, :path=>"proyectos"
     end 
   end
 

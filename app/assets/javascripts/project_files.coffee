@@ -8,15 +8,23 @@ $(document).on 'click', '#new-folder-link', ->
 
 $(document).on 'click', '#new_folder_btn', ->
   $('#modal-new-folder').modal('close')
-  folder_name = $('#new_folder_name').val()
-  url = $(this).data('url')
   $.post(
-    url,
-    { "project_folder[name]": $('#new_folder_name').val() },
+    '/crear-carpeta',
+    { project_id: $(this).data('project-id'), new_folder: $('#new_folder_name').val(), user_id: $(this).data('user-id') },
     (xhr) ->
       res = $.parseJSON(xhr)
       Materialize.toast(res['flash'], 3000)
+      url = $('#folders-area').data('project-url') + '/documentos/carpetas'
+      $.get url, (data) ->
+        $('#folders-area').html(data)
+        $('.folder-row').removeClass('folder-selected')
+        $('#folder-' + res['new_folder_id']).addClass('folder-selected')
+        $('#folder-' + res['new_folder_id']).click()
   )
+  .fail( (data) ->
+    Materialize.toast(res['flash'], 3000)
+  )
+
 
 $(document).on 'click', '.file-delete', ->
   if confirm '¿Eliminar archivo?' 

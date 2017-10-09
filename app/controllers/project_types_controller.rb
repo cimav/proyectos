@@ -129,6 +129,38 @@ class ProjectTypesController < ApplicationController
     end
   end
 
+  def add_folder
+    @project = Project.find(6)
+    folder = @project.project_folders.new
+    folder.name = params[:new_folder]
+    folder.user_id = 72
+    respond_to do |format|
+      if folder.save
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:new_status_id] = folder.id
+            json[:flash] = 'Nueva carpeta guardada'
+            render :json => json
+          else
+            redirect_to folder
+          end
+        end
+      else
+        format.html do
+          if request.xhr?
+            json = {}
+            json[:flash] = 'Error al guardar'
+            json[:errors] = folder.errors
+            render :json => json, :status => :unprocessable_entity
+          else
+            redirect_to folder
+          end
+        end
+      end
+    end
+  end
+
 
   def update_status 
     ps = ProjectStatus.find(params[:psid])

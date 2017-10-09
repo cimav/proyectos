@@ -4,15 +4,9 @@
 
   <div class="row docs-area">
     <div class="col s4 m4 docs-folders">
-      <table class="highlight">
-        <tr><th colspan="2">Carpetas</th></tr>
-        <% @project.project_folders.order(:name).each do |folder| %>
-          <% folder_selected = @project_folder.id.to_i == folder.id.to_i ? "folder-selected" : "" %>
-          <tr class="tr-link <%= folder_selected %>" data-href="<%= "#{project_url}/documentos/#{folder.id}" %>"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-3">folder</i></td><td><a href="#"><%= folder.name %></a></td></tr>
-        <% end %>
-         <tr class="new-folder-row"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-4">create_new_folder</i></td><td><a id="new-folder-link">Crear nueva carpeta</a></td></tr>
-      </table>
-      <div class="clearfix"></div>
+      <div id="folders-area" data-project-url="<%= "#{project_url}" %>">
+        <%= render 'projects/folder_list', project: @project,  project_folder_id: @project_folder.id %>
+      </div>
     </div>
     <div class="col s8 m8 docs-files">
       <div id="files-area" data-list-url="<%= "#{project_url}/documentos/#{@project_folder.id}/listado" %>">
@@ -37,7 +31,7 @@
         </div>
       </div>
       <div class="col s3">
-        <button id="new_folder_btn" class="btn-large red" data-url="<%= project_folders_url %>">Crear carpeta</button>
+        <button id="new_folder_btn" class="btn-large red" data-user-id="<%= current_user.id %>" data-project-id="<%= @project.id %>" data-user-id="<%= current_user.id ">Crear carpeta</button>
       </div>
   </div>
 </div>
