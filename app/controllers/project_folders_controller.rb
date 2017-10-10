@@ -1,6 +1,7 @@
 class ProjectFoldersController < ApplicationController
+  before_action :auth_required
   before_action :set_project_folder, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session
+  
 
   # GET /project_folders
   # GET /project_folders.json
@@ -55,48 +56,16 @@ class ProjectFoldersController < ApplicationController
     end
   end
 
-  def create
-    # @project = Project.find(6)
-    # folder = @project.project_folders.new
-    # folder.name = params[:new_folder]
-    # folder.user_id = 72
-    folder = ProjectFolder.new(project_folder_params)
-    folder.user_id = current_user.id
-    respond_to do |format|
-      if folder.save
-        format.html do
-          if request.xhr?
-            json = {}
-            json[:new_status_id] = folder.id
-            json[:flash] = 'Nueva carpeta guardada'
-            render :json => json
-          else
-            redirect_to folder
-          end
-        end
-      else
-        format.html do
-          if request.xhr?
-            json = {}
-            json[:flash] = 'Error al guardar'
-            json[:errors] = folder.errors
-            render :json => json, :status => :unprocessable_entity
-          else
-            redirect_to folder
-          end
-        end
-      end
-    end
-  end
-
   # POST /project_folders
   # POST /project_folders.json
-  def createx
+  def create
     @project_folder = ProjectFolder.new(project_folder_params)
+    @project_folder.user_id = current_user.id
 
     respond_to do |format|
       if @project_folder.save
-        format.html { redirect_to @project_folder, notice: 'Project folder was successfully created.' }
+        url = url_for(action: 'folder_files', controller: 'projects', id: @project_folder.project_id, project_folder_id: @project_folder.id )
+        format.html { redirect_to url, notice: 'Carpeta creada.' }
         format.json { render :show, status: :created, location: @project_folder }
       else
         format.html { render :new }
@@ -137,6 +106,6 @@ class ProjectFoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_folder_params
-      params.require(:project_folder).permit(:name, :description, :folder_type, :user_id)
+      params.require(:project_folder).permit(:name, :description, :folder_type, :user_id, :project_id)
     end
 end

@@ -24,14 +24,21 @@
 <!-- Modal New Folder -->
 <div id="modal-new-folder" class="modal bottom-sheet">
   <div class="modal-content">
-    <div class="row">
-      <div class="col s9">
-        <div class="field">
-          <input id="new_folder_name" type="text" placeholder="Nueva carpeta..." name="new_folder_name">
+    <form action="<%= project_folders_path %>" method="POST">
+    <% project_folder = ProjectFolder.new %>
+    <%= form_with(model: project_folder, local: true) do |form| %>
+      <div class="row">
+        <div class="col s9">
+          <div class="field">
+            <input type="hidden" name="project_folder[project_id]" value="<%= @project.id %>">
+            <%= form.text_field :name, id: :project_folder_name, placeholder: "Nueva carpeta...", class: "new_folder_name" %>
+          </div>
+        </div>
+        <div class="col s3">
+          <button id="new_folder_btn" type="submit" class="btn-large red" data-user-id="<%= current_user.id %>" data-project-id="<%= @project.id %>" data-user-id="<%= current_user.id %>">Crear carpeta</button>
         </div>
       </div>
-      <div class="col s3">
-        <button id="new_folder_btn" class="btn-large red" data-user-id="<%= current_user.id %>" data-project-id="<%= @project.id %>" data-user-id="<%= current_user.id ">Crear carpeta</button>
-      </div>
+    <% end %>
   </div>
 </div>
+      
