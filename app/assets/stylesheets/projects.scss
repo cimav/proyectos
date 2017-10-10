@@ -393,12 +393,12 @@ input#schedules_title {
 
 .docs-area {
   margin-top: 2em;
-  min-height: 400px;
   border: 1px solid #ddd;
   .docs-folders {
+    border-right: 1px solid #ddd;
+    background: #fefefe;
     padding: 0 !important;
     margin: 0 !important;
-    min-height: 400px;
     th {
       padding: 0.4em;
       margin: 0;
@@ -416,7 +416,7 @@ input#schedules_title {
     .new-folder-row td {
       border-top: 1px solid #eee;
       a {
-        color: #777;
+        color: #000;
       }
     }
     .folder-icon {
@@ -426,8 +426,7 @@ input#schedules_title {
   .docs-files {
     padding: 0 !important;
     margin: 0 !important;
-    min-height: 400px;
-    border-left: 1px solid #ddd;
+    
     #files-area {
       min-height: 400px;
     }

@@ -3,12 +3,12 @@
   <div class="project-area-title">Documentos y Archivos</div>
 
   <div class="row docs-area">
-    <div class="col s4 m4 docs-folders">
+    <div class="col s4 m4 docs-folders docs-section">
       <div id="folders-area" data-project-url="<%= "#{project_url}" %>">
         <%= render 'projects/folder_list', project: @project,  project_folder_id: @project_folder.id %>
       </div>
     </div>
-    <div class="col s8 m8 docs-files">
+    <div class="col s8 m8 docs-files docs-section">
       <div id="files-area" data-list-url="<%= "#{project_url}/documentos/#{@project_folder.id}/listado" %>">
         <%= render 'projects/files_list', project_folder: @project_folder %>
       </div>

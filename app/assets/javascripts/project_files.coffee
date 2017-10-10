@@ -40,6 +40,7 @@ $(document).on "ready turbolinks:load", ->
   project_files_init()
 
 project_files_init = () ->
+  $('.docs-section').matchHeight();
   $('#modal-new-folder').modal()
   $('#files-dropzone').dropzone
     paramName: 'project_file[file]'

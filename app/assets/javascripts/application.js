@@ -14,10 +14,10 @@
 //= require turbolinks
 //= require jquery
 //= require jquery-ui
-//= require trix
-//= require_tree .
 //= require materialize-sprockets
 //= require dropzone
+//= require trix
+//= require_tree .
 
 $(document).on('ready turbolinks:load', function() {
   $(".dropdown-button").dropdown();

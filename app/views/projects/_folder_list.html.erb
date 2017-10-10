@@ -4,5 +4,5 @@
     <% folder_selected = project_folder_id.to_i == folder.id.to_i ? "folder-selected" : "" %>
     <tr class="tr-link folder-row <%= folder_selected %>" data-href="<%= "#{project_url}/documentos/#{folder.id}" %>" id="folder-<%= folder.id %>"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-3">folder</i></td><td><a href="#"><%= folder.name %></a></td></tr>
   <% end %>
-  <tr class="new-folder-row"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-4">create_new_folder</i></td><td><a id="new-folder-link">Crear nueva carpeta</a></td></tr>
+  <tr class="new-folder-row"><td class="folder-icon"><i class="small material-icons  amber-text text-lighten-3">create_new_folder</i></td><td><a id="new-folder-link">Crear nueva carpeta</a></td></tr>
 </table>
