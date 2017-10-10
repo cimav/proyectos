@@ -9,6 +9,8 @@ class Project < ApplicationRecord
   has_many   :schedules
   has_many   :messages
   has_many   :project_folders
+  has_many   :project_files, :through => :project_folders
+  
 
 
   before_validation :set_extra, on: :create

@@ -159,9 +159,23 @@
   <div class="col s12 m6 l4">
     <div class="card card-link" data-href="<%= "#{project_url}" %>/documentos">
       <div class="card-content">
+        <% max_files = 3 %>
         <div class="project-card-title title-documentos">Documentos y Archivos</div>
-        <div class="project-card-icon center"><i class="material-icons large pink-text">folder</i></div>
-        <div class="project-card-initial-message">Comparte documentos, archivos, imagenes, reportes.</div>
+        <% recent_files = @project.project_files.order('project_files.created_at DESC').limit(max_files) %>
+        <% if recent_files.count > 0 %>
+          <table>
+            <% recent_files.each do |file| %>
+              <tr>
+                <td><div class="file-ico"><div class="file-ico-inner <%= file.ext %>-ico"><%= file.ext %></div></div></td>
+                <td><%= file.name %></td>
+                <td class="no-wrap"><%= f_date(file.created_at) %></td>
+              </tr>
+            <% end %>
+          </table>
+        <% else %>
+          <div class="project-card-icon center"><i class="material-icons large pink-text">folder</i></div>
+          <div class="project-card-initial-message">Comparte documentos, archivos, imagenes, reportes.</div>
+        <% end %>
       </div>
     </div>
   </div>
