@@ -26,6 +26,13 @@ Rails.application.routes.draw do
         get :folders, :path => "documentos/carpetas"
         get :folder_files, :path => "documentos/:project_folder_id"
         get :folder_files_list, :path => "documentos/:project_folder_id/listado"
+
+
+        get :budget, :path => "presupuesto"
+
+        get :people, :path => "personas"
+
+        get :services, :path => "servicios"
       end
     end   
   end

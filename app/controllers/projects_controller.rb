@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :auth_required
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, :new_message, :show_message, :edit_message, :schedules, :new_schedule, :show_schedule, :edit_schedule, :files, :folder_files, :folder_files_list, :folders]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :messages, 
+                                     :new_message, :show_message, :edit_message, 
+                                     :schedules, :new_schedule, :show_schedule, 
+                                     :edit_schedule, :files, :folder_files, 
+                                     :folder_files_list, :folders, :budget, :people,
+                                     :services]
 
   # GET /projects
   # GET /projects.json
@@ -144,6 +149,14 @@ class ProjectsController < ApplicationController
         end
       end
     end
+  end
+
+  def budget
+
+  end
+
+  def people
+
   end
 
 
