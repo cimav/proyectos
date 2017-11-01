@@ -1,7 +1,125 @@
 <%= render 'header', project: @project, show_top_menu: true %>
 <div class="project-area z-depth-1">
   <div class="project-area-title">Presupuesto</div>
+  <% 
+  current_partida = 0 
+  subtotal = {}
+  subtotal['autorizado']    = 0
+  subtotal['pagado']        = 0
+  subtotal['ejercido']      = 0
+  subtotal['devengado']     = 0
+  subtotal['por_comprobar'] = 0
+  subtotal['comprometido']  = 0
+  subtotal['disponible']    = 0
+  total = {}
+  total['autorizado']    = 0
+  total['pagado']        = 0
+  total['ejercido']      = 0
+  total['devengado']     = 0
+  total['por_comprobar'] = 0
+  total['comprometido']  = 0
+  total['disponible']    = 0
+  %>
+  <table class="budget-table">
+    <thead>
+      <tr>
+  	    <th>PARTIDA</th>
+	  	<th>CONCEPTO</th>
+	  	<th>APROBADO</th>
+	  	<th>PAGADO</th>
+	  	<th>EJERCIDO</th>
+	  	<th>DEVENGADO</th>
+	  	<th>GTO X COMP</th>
+	  	<th>COMPROMETIDO</th>
+	    <th>DISPONIBLE</th>
+	  </tr>
+    </thead>
+    <tbody>
+    <% @project.budget_details.each do |row| 
+       current_partida = row['partida'].to_s[0,1] if current_partida == 0
+       if row['partida'].to_s[0,1] != current_partida.to_s 
+         %>
+         <tr class="subtotal-partida">
+    	   <td></td>
+	  	   <td class="total-td">TOTAL CAPÍTULO <%= current_partida %>000</td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['pagado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['ejercido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['devengado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['por_comprobar'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	   <td class="right-align"><%= number_to_currency(subtotal['comprometido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	       <td class="right-align"><%= number_to_currency(subtotal['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+        </tr>
+        <tr class="separator">
+          <td colspan="9"></td>
+        </tr>
+        <%
+        current_partida = row['partida'].to_s[0,1]
 
+        subtotal['autorizado']    = 0
+        subtotal['pagado']        = 0
+        subtotal['ejercido']      = 0
+        subtotal['devengado']     = 0
+        subtotal['por_comprobar'] = 0
+        subtotal['comprometido']  = 0
+        subtotal['disponible']    = 0
+       end
+
+       subtotal['autorizado']    += row['total_autorizado']
+       subtotal['pagado']        += row['total_pagado']
+       subtotal['ejercido']      += row['total_pagado']
+       subtotal['devengado']     += row['total_devengado']
+       subtotal['por_comprobar'] += row['total_por_comprobar']
+       subtotal['comprometido']  += row['total_comprometido']
+       subtotal['disponible']    += row['total_disponible']
+
+       total['autorizado']    += row['total_autorizado']
+       total['pagado']        += row['total_pagado']
+       total['ejercido']      += row['total_ejercido']
+       total['devengado']     += row['total_devengado']
+       total['por_comprobar'] += row['total_por_comprobar']
+       total['comprometido']  += row['total_comprometido']
+       total['disponible']    += row['total_disponible']
+       
+    %>
+    <tr>
+    	<td><%= row['partida'] %></td>
+	  	<td><%= row['concepto'] %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_pagado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_ejercido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_devengado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_por_comprobar'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  	<td class="right-align"><%= number_to_currency(row['total_comprometido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	    <td class="right-align"><%= number_to_currency(row['total_disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+    </tr> 
+
+  <% end %>
+    <tr class="subtotal-partida">
+      <td></td>
+	  <td class="total-td">TOTAL CAPÍTULO <%= current_partida %>000</td>
+	  <td class="right-align"><%= number_to_currency(subtotal['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(subtotal['pagado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(subtotal['ejercido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(subtotal['devengado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(subtotal['por_comprobar'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(subtotal['comprometido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+      <td class="right-align"><%= number_to_currency(subtotal['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+    </tr>
+    <tr class="separator"><td colspan="9"></td></tr>
+    <tr class="totales">
+      <td></td>
+	  <td class="total-td">TOTAL DE INGRESO/GASTO</td>
+	  <td class="right-align"><%= number_to_currency(total['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(total['pagado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(total['ejercido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(total['devengado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(total['por_comprobar'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+	  <td class="right-align"><%= number_to_currency(total['comprometido'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+      <td class="right-align"><%= number_to_currency(total['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></td>
+    </tr>
+  </tbody>
+</table>
 </div>
 <script>
 Materialize.toast('<%= notice %>', 3000)

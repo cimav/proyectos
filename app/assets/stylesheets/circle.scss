@@ -81,6 +81,10 @@ $primary-color-orange-dark: #e08833;
 	&.big{
 		font-size: 240px;
 	}
+	// smaller size
+	&.medium{
+		font-size: 120px;
+	}
 
 	// smaller size
 	&.small{
@@ -221,7 +225,50 @@ $primary-color-orange-dark: #e08833;
 	}
 
 
-	// green skin
+	// yellow skin
+	&.c-yellow{
+
+		.bar, .fill { border-color: #ffc107 !important;}
+
+		&:hover{
+			> span { color: #ffc107; }
+		}
+
+	}
+
+		&.yellow.dark{
+
+			.bar, .fill { border-color: #ffa000  !important;}
+
+			&:hover{
+				> span { color: #ffa000;}
+			}
+
+		}
+
+
+	// red skin
+	&.c-red{
+
+		.bar, .fill { border-color: #f44336 !important;}
+
+		&:hover{
+			> span { color: #f44336; }
+		}
+
+	}
+
+		&.red.dark{
+
+			.bar, .fill { border-color: #b71c1c !important;}
+
+			&:hover{
+				> span { color: #b71c1c;}
+			}
+
+		}
+
+    // yellow skin
 	&.c-green{
 
 		.bar, .fill { border-color: $primary-color-green !important;}

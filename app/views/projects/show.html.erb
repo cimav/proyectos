@@ -38,28 +38,42 @@
   </div>
 
   <div class="col s12 m6 l4">
-    <div class="card">
+    <div class="card card-link" data-href="<%= "#{project_url}" %>/presupuesto">
       <div class="card-content">
         <div class="project-card-title title-presupuesto">Presupuesto</div>
           <% if true %>
-            <% if @project.budget == 0 
+            <% budget_resume = @project.budget_resume %>
+            <% if budget_resume['autorizado'] == 0 
                  budget_percentage = 100
                else
-                  budget_percentage = (@project.budget_available * 100 / @project.budget).round 
+                 budget_percentage = 100 - (budget_resume['disponible'] * 100 / budget_resume['autorizado']).round 
+               end
+
+               if budget_percentage >= 90
+                 c_color = 'c-red'
+               elsif budget_percentage >= 70
+                 c_color = 'c-yellow'
+               else 
+                 c_color = 'c-green'
                end
             %>
-            <div class="c100 p<%= budget_percentage %> small c-green center">
+            <div class="budget-numbers-circle c100 p<%= budget_percentage %> medium <%= c_color %> center">
               <span><%= budget_percentage %>%</span>
               <div class="slice">
                 <div class="bar"></div>
                 <div class="fill"></div>
               </div>
             </div>
-            <p><br/><br/>
-            Presupuesto: <%= number_to_currency(@project.budget) %><br/>
-            Disponible: <%= number_to_currency(@project.budget_available) %><br/>
-            Requisiciones: 0
-            </p>
+            <div class="row budget-numbers">
+              <div class="col s6">
+                <div class="budget-numbers-header">Presupuesto</div>
+                <div class="budget-numbers-amount"><%= number_to_currency(budget_resume['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></div>
+              </div>
+              <div class="col s6">
+                <div class="budget-numbers-header">Disponible</div>
+                <div class="budget-numbers-amount"><%= number_to_currency(budget_resume['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></div>
+              </div>
+            </div>
           <% else %>
             <div class="project-card-icon center"><i class="material-icons large deep-orange-text">attach_money</i></div>
             <div class="project-card-initial-message">Ve el estado del presupuesto de tu proyecto. Es necesario tener capturado el número de proyecto del sistema <strong>NetMultix</strong>.</div>

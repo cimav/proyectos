@@ -558,4 +558,43 @@ input.new_folder_name {
   cursor: pointer;
 }
 
+.budget-table {
+  font-size: 80%;
+  tr.subtotal-partida {
+    td {
+      font-weight: 500;
+      border-top: 1px solid #000;
+      background: #fff !important;
+    }
+  }
+  tr.separator {
+    td {
+      background: #fff !important;
+    }
+  }
+  tr.totales {
+    td {
+      font-weight: 900;
+      border-top: 2px solid #000;
+      background: #fff !important;
+    }
+  }
+}
+
+.budget-numbers-circle {
+  margin-top: 0.5em;
+}
+
+.budget-numbers {
+  margin-top: 1em;
+  .budget-numbers-header {
+    font-weight: 300;
+    color: #666;
+  }
+  .budget-numbers-amount {
+    font-weight: 500;
+    font-size: 140%;
+  }
+  
+}
 
