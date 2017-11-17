@@ -1,0 +1,34 @@
+<%= render 'header', project: @project, show_top_menu: true %>
+<div class="project-area z-depth-1">
+  <div class="project-area-title"><a href="<%= "#{project_url}" %>/presupuesto">Presupuesto</a></div>
+  <div class="project-area-title"><i class="material-icons">expand_more</i></div>
+  <div class="project-area-title">Requisiciones</div>
+  <div class="spacer-2em"></div>
+  <table class="purchase-req-table">
+    <thead>
+      <tr>
+  	  <th>REQUISICIÓN</th>
+	  	<th>FECHA</th>
+	  	<th>REALIZÓ</th>
+	  	<th>SOLICITANTE</th>
+	  	<th>RESPONSABLE</th>
+	  	<th>ESTADO</th>
+	  </tr>
+  </thead>
+  <tbody>
+    <% @project.purchase_requests.each do |row| %>
+      <tr>
+        <td><a href="<%= "#{project_url}" %>/presupuesto/requisiciones/<%= row['requisicion'] %>"><%= row['requisicion'] %></a></td>
+        <td><%= row['fecha'] %></td>
+        <td><%= row['usuario'] %></td>
+        <td><%= row['solicitante'] %></td>
+        <td><%= row['responsable'] %></td>
+        <td><%= row['estado'] %></td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
+</div>
+<script>
+Materialize.toast('<%= notice %>', 3000)
+</script>

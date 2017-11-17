@@ -26,6 +26,22 @@ class Project < ApplicationRecord
   }
 
 
+  STATUS_REQ_TEXT = {
+    -1 => 'Req. capturada',
+     0 => 'En espera de autorizaci&oacute,n',
+     1 => 'Requisicion autorizada',
+     2 => 'Solicitud Cotizaci&oacute,n',
+     3 => 'Cotizaciones Capturadas',
+     4 => 'Pedido Generado',
+     5 => 'Pedido Autorizado',
+     6 => 'Pedido Parcialmente Surtido',
+     7 => 'Pedido Surtido',
+     8 => 'Cancelado(Se cometio un Error)',
+     9 => 'Req. Capturada no autorizada',
+    10 => 'Cancelada por presupuesto'
+  }
+
+
   def research_text
     RESEARCH_TYPE[research_type.to_i]
   end
@@ -48,6 +64,44 @@ class Project < ApplicationRecord
   
   def end_schedule
     schedules.where(schedule_type: Schedule::PROJECT_END).first 
+  end
+
+  def purchase_requests(limit = nil)
+    sql = "SELECT DISTINCT 
+             co01_requisicion AS requisicion, 
+             co01_fecha_req AS fecha_req, 
+             CONCAT(SUBSTRING(co01_fecha_req,7,2),'/',SUBSTRING(co01_fecha_req,5,2),'/',SUBSTRING(co01_fecha_req,1,4)) AS fecha, 
+             co01_cve_responsable, 
+             CONCAT(TRIM(r.no01_nombre),' ',TRIM(r.no01_apellido_pat),' ',TRIM(r.no01_apellido_mat)) AS responsable, 
+             co01_usuario, 
+             CONCAT(TRIM(u.no01_nombre),' ',TRIM(u.no01_apellido_pat),' ',TRIM(u.no01_apellido_mat)) AS usuario, 
+             co01_solicitante, 
+             CONCAT(TRIM(s.no01_nombre),' ',TRIM(s.no01_apellido_pat),' ',TRIM(s.no01_apellido_mat)) AS solicitante, 
+             co01_status AS status
+          FROM 
+            netmultix.co01 
+            LEFT JOIN netmultix.co02 on co01_requisicion = co02_requisicion 
+            LEFT JOIN netmultix.no01 u on co01_usuario = u.no01_cve_emp 
+            LEFT JOIN netmultix.no01 r on co01_cve_responsable = r.no01_cve_emp 
+            LEFT JOIN netmultix.no01 s on co01_solicitante = s.no01_cve_emp 
+          WHERE co02_proyecto LIKE '%#{self.erp_number}%'  
+          ORDER BY co01_fecha_req DESC"
+
+    if limit && limit > 0
+      sql = sql + " LIMIT #{limit.to_i}"
+    end
+
+    connection = ActiveRecord::Base.connection
+    result = connection.exec_query(sql)
+
+    rows = []
+    
+    result.each do |row|
+      row['estado'] = STATUS_REQ_TEXT[row['status'].to_i]
+      rows << row
+    end
+
+    return rows
   end
 
 

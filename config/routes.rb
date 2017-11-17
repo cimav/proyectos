@@ -29,6 +29,9 @@ Rails.application.routes.draw do
 
 
         get :budget, :path => "presupuesto"
+        get :budget_details, :path => "presupuesto/detalle"
+        get :purchase_requests, :path => "presupuesto/requisiciones"
+        get :show_purchase_request, :path => "presupuesto/requisiciones/:req_id"
 
         get :people, :path => "personas"
 

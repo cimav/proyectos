@@ -4,8 +4,9 @@ class ProjectsController < ApplicationController
                                      :new_message, :show_message, :edit_message, 
                                      :schedules, :new_schedule, :show_schedule, 
                                      :edit_schedule, :files, :folder_files, 
-                                     :folder_files_list, :folders, :budget, :people,
-                                     :services]
+                                     :folder_files_list, :folders, :budget, 
+                                     :budget_details, :purchase_requests, 
+                                     :show_purchase_request, :people, :services]
 
   # GET /projects
   # GET /projects.json
@@ -152,6 +153,79 @@ class ProjectsController < ApplicationController
   end
 
   def budget
+
+  end
+
+  def budget_details
+
+  end
+
+  def purchase_requests 
+  end
+
+  def show_purchase_request
+    sql = "SELECT 
+             co01_requisicion AS requisicion, 
+             concat(SUBSTRING(co01_fecha_req,7,2),'/',SUBSTRING(co01_fecha_req,5,2),'/',SUBSTRING(co01_fecha_req,1,4)) AS fecha, 
+             co01_cve_responsable, 
+             CONCAT(TRIM(r.no01_nombre),' ',TRIM(r.no01_apellido_pat),' ',TRIM(r.no01_apellido_mat)) AS responsable, 
+             co01_usuario, 
+             CONCAT(TRIM(u.no01_nombre),' ',TRIM(u.no01_apellido_pat),' ',TRIM(u.no01_apellido_mat)) AS usuario, 
+             co01_solicitante, 
+             CONCAT(TRIM(s.no01_nombre),' ',TRIM(s.no01_apellido_pat),' ',TRIM(s.no01_apellido_mat)) AS solicitante, 
+             co01_status AS status, 
+             co02_proyecto AS cproyecto, 
+             pr10_desc_completa AS proyecto, 
+             co02_sol_cotizacion AS cotizacion,
+             co02_partida AS partida, 
+             co02_descripcion AS descripcion, 
+             co02_desc_larga AS desclarga, 
+             co02_status AS status2, 
+             pv01_nombre AS proveedor,
+             co03_tiempo_entrega AS tiempoentrega,
+             co09_cant_rec AS cantidad, 
+             co09_costo AS costo, 
+             co09_importe_ped AS importe, 
+             co09_importe_iva AS iva, 
+             co09_impuesto AS impuesto, 
+             co18_desc_sesion AS sesion, 
+             co05_pedido AS ordencompra, 
+             CONCAT(SUBSTRING(co05_fecha_pedido,7,2),'/',SUBSTRING(co05_fecha_pedido,5,2),'/',SUBSTRING(co05_fecha_pedido,1,4)) AS fechaordencompra,
+             CONCAT(SUBSTRING(co02_fecha_sesion,7,2),'/',SUBSTRING(co02_fecha_sesion,5,2),'/',SUBSTRING(co02_fecha_sesion,1,4)) AS fechasesion 
+           FROM 
+             netmultix.co01 
+             INNER JOIN netmultix.co02 on co01_requisicion = co02_requisicion 
+             LEFT JOIN netmultix.co09 on co01_requisicion = co09_requisicion and co02_id = co09_id 
+             LEFT JOIN netmultix.co05 on co05_sol_cotizacion = co02_sol_cotizacion 
+             LEFT JOIN netmultix.co03 on co03_sol_cotizacion = co02_sol_cotizacion and co03_cve_prov = co05_cve_prov 
+             LEFT JOIN netmultix.pv01 on co03_cve_prov = pv01_clave 
+             LEFT JOIN netmultix.pr10 on co02_proyecto = pr10_proyecto 
+             LEFT JOIN netmultix.co18 on co02_sesion = co18_id_sesion 
+             LEFT JOIN netmultix.no01 u on co01_usuario = u.no01_cve_emp 
+             LEFT JOIN netmultix.no01 r on co01_cve_responsable = r.no01_cve_emp 
+             LEFT JOIN netmultix.no01 s on co01_solicitante = s.no01_cve_emp 
+          WHERE CO01_REQUISICION = '#{params[:req_id]}'"
+
+    @request = {} 
+    connection = ActiveRecord::Base.connection
+    result = connection.exec_query(sql)
+
+
+    @request['number'] = params[:req_id]
+    @request['details'] = []
+    
+    result.each do |row|
+      row['estado'] = Project::STATUS_REQ_TEXT[row['status'].to_i]
+      @request['details'] << row
+    end
+
+    sql_comments = "SELECT * FROM netmultix.pr07h WHERE pr07h_folio = '#{params[:req_id]}'"
+    @request['comments'] = []
+    result = connection.exec_query(sql_comments)
+    result.each do |row|
+      @request['comments'] << row
+    end
+
 
   end
 

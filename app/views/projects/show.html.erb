@@ -41,7 +41,7 @@
     <div class="card card-link" data-href="<%= "#{project_url}" %>/presupuesto">
       <div class="card-content">
         <div class="project-card-title title-presupuesto">Presupuesto</div>
-          <% if true %>
+          <% if @project.erp_number.mb_chars.length > 0 %>
             <% budget_resume = @project.budget_resume %>
             <% if budget_resume['autorizado'] == 0 
                  budget_percentage = 100
