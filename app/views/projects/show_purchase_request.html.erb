@@ -1,9 +1,9 @@
 <%= render 'header', project: @project, show_top_menu: true %>
-<div class="project-area z-depth-1">
+<div class="project-area z-depth-1" style="padding-left: 0 !important;padding-right: 0 !important; padding-bottom: 0 !important;">
   <div class="project-area-title"><a href="<%= "#{project_url}" %>/presupuesto">Presupuesto</a></div>
-  <div class="project-area-title"><i class="material-icons">expand_more</i></div>
+  <div class="project-area z-depth-2" style="margin-left: 4px !important; padding-left: 0 !important;padding-right: 0 !important; padding-bottom: 0 !important;">
   <div class="project-area-title"><a href="<%= "#{project_url}" %>/presupuesto/requisiciones">Requisiciones</a></div>
-    <div class="project-area-title"><i class="material-icons">expand_more</i></div>
+  <div class="project-area z-depth-3" style="margin-left: 4px !important;">
   <div class="project-area-title">Requisición <%= @request['number'] %></div>
   <div class="spacer-2em"></div>
   <table class="purchase-req-table">
@@ -46,6 +46,16 @@
     <% end %> 
     </tbody>
   </table>
+  <div class="spacer-2em"></div>
+  <% if @request['comments'].count > 0 %>
+      <h5>Comentarios</h5>
+      <ul class="collection">
+      <% @request['comments'].each do |row| %>
+        <li class="collection-item"><%= row['pr07h_comentario'] %></li>
+      <% end %>
+  <% end %>
+</div>
+</div>
 </div>
 <script>
 Materialize.toast('<%= notice %>', 3000)
