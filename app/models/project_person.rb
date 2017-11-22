@@ -1,4 +1,4 @@
 class ProjectPerson < ApplicationRecord
   belongs_to :project
-  belongs_to :people
+  belongs_to :person, :foreign_key => "people_id"
 end

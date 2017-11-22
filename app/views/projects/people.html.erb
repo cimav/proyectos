@@ -1,7 +1,20 @@
 <%= render 'header', project: @project, show_top_menu: true %>
 <div class="project-area z-depth-1">
   <div class="project-area-title">Personas</div>
-
+  <div class="spacer-2em"></div>
+  <table class="people bordered highlight">
+  	<% @project.project_person.each do |project_person| %>
+      <tr>
+  	    <td class="person-avatar"><img src="<%= project_person.person.picture %>" class="circle picture-64 responsive-img"></td>
+  	    <td>
+  	      <div class="person-name"><%= project_person.person.name %></div>
+  	      <div class="person-email"><%= project_person.person.email %></div>
+  	    </td>
+  	    <td><%= project_person.role %><br/><%= project_person.person.attachable.short_name %></td>
+  	    <td>Tel. <%= project_person.person.phone %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 <script>
 Materialize.toast('<%= notice %>', 3000)

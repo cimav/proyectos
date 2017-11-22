@@ -641,4 +641,20 @@ input.new_folder_name {
   font-size: 90%;
 }
 
+table.people {
+  border-collapse: collapse;
+  tr {
+    td {
+      padding: 0.5em 0;
+      margin: 0;
+      &.person-avatar {
+        width: 84px;
+      }
+      .person-name {
+        font-weight: 500;
+        font-size: 120%;
+      }
+    }
+  }
+}
 
