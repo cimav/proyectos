@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :project_files, :path=>'archivos'
     resources :projects, :path => "proyectos"  do
       member do
+
+        get :details, :path => "detalles"
+
         get :messages, :path => "mensajes"
         get :new_message, :path => "mensajes/nuevo"
         get :show_message, :path => "mensajes/:message_id"

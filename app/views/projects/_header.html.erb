@@ -11,7 +11,7 @@
 <% if show_top_menu %>
 <table id="project-menu">
 <tr>
-<td><a class="waves-effect waves-light menu-item red darken-1" href="<%= edit_project_path(@project) %>">Información</a></td>
+<td><a class="waves-effect waves-light menu-item red darken-1" href="<%= "#{project_url}" %>/detalles">Información</a></td>
 <td><a class="waves-effect waves-light menu-item deep-orange lighten-1" href="<%= "#{project_url(@project)}" %>/presupuesto">Presupuesto</a></td>
 <td><a class="waves-effect waves-light menu-item amber accent-4" href="<%= "#{project_url(@project)}" %>/mensajes">Mensajes</a></td>
 <td><a class="waves-effect waves-light menu-item green" href="<%= "#{project_url(@project)}" %>/calendario">Calendario</a></td>

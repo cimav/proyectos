@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
                                      :edit_schedule, :files, :folder_files, 
                                      :folder_files_list, :folders, :budget, 
                                      :budget_details, :purchase_requests, 
-                                     :show_purchase_request, :people, :services]
+                                     :show_purchase_request, :people, :services,
+                                     :details ]
 
   # GET /projects
   # GET /projects.json
@@ -17,6 +18,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+  end
+
+  def details
   end
 
   # GET /projects/new
@@ -52,8 +56,8 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Proyecto actualizado.' }
-        format.json { render :show, status: :ok, location: @project }
+        format.html { redirect_to details_project_url, notice: 'Proyecto actualizado.' }
+        format.json { render :details, status: :ok, location: @project }
       else
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
