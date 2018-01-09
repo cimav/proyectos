@@ -39,6 +39,8 @@ Rails.application.routes.draw do
         get :people, :path => "personas"
 
         get :services, :path => "servicios"
+
+        patch :update_status, :path => "update-status"
       end
     end   
   end

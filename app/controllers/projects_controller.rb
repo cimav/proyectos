@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
                                      :folder_files_list, :folders, :budget, 
                                      :budget_details, :purchase_requests, 
                                      :show_purchase_request, :people, :services,
-                                     :details ]
+                                     :details, :update_status ]
 
   # GET /projects
   # GET /projects.json
@@ -57,6 +57,19 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to details_project_url, notice: 'Proyecto actualizado.' }
+        format.json { render :details, status: :ok, location: @project }
+      else
+        format.html { render :edit }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_status
+    @project.status = params[:new_status]
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to details_project_url, notice: 'Estado actualizado.' }
         format.json { render :details, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -246,6 +259,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :client_id, :number, :internal_name, :goal, :manager_id, :agent_id, :department_id, :business_unit_id, :project_type_id, :status, :research_type, :erp_number, :results)
+      params.require(:project).permit(:name, :client_id, :number, :internal_name, :goal, :manager_id, :agent_id, :department_id, :business_unit_id, :project_type_id, :status, :research_type, :erp_number, :results, :new_status, :status_notes)
     end
 end
