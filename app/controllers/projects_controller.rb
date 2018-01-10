@@ -66,9 +66,21 @@ class ProjectsController < ApplicationController
   end
 
   def update_status
+    prev_status = @project.project_status.name
+
     @project.status = params[:new_status]
+
     respond_to do |format|
       if @project.save
+        
+        nm = @project.messages.new
+        nm.user_id = current_user.id
+        nm.title = "Proyecto #{@project.number} cambió a #{@project.project_status.name}"
+        nm.content = "Proyecto #{@project.number} cambió de #{prev_status} a #{@project.project_status.name}.<br/>#{params['status_notes']}"
+        nm.status = Message::ACTIVE
+        nm.message_type = Message::TYPE_STATUS
+        nm.save
+
         format.html { redirect_to details_project_url, notice: 'Estado actualizado.' }
         format.json { render :details, status: :ok, location: @project }
       else

@@ -27,6 +27,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = current_user.id
     @message.status = Message::ACTIVE
+    @message.message_type = Message::TYPE_MESSAGE
     @project = @message.project
     respond_to do |format|
       if @message.save

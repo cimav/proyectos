@@ -7,4 +7,8 @@ class Message < ApplicationRecord
 
   ACTIVE = 1
   DELETED = 2
+
+  TYPE_MESSAGE = 1
+  TYPE_STATUS = 2
+  
 end
