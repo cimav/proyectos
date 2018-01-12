@@ -156,6 +156,14 @@ class Project < ApplicationRecord
     return rows
   end
 
+  def start_date
+    'IMPLEMENT ME'
+  end
+
+  def end_date
+    'IMPLEMENT ME'
+  end
+
 
   private
 

@@ -10,3 +10,12 @@ $(document).on "ready turbolinks:load", ->
 
 project_init = () ->
   $('#modal-status').modal()
+  $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+      selectMonths: true,
+      selectYears: 15, 
+      today: 'Hoy',
+      clear: 'Limpiar',
+      close: 'Ok',
+      closeOnSelect: false 
+    });

@@ -42,6 +42,21 @@
     <%= form.text_field :number, id: :project_number %>
   </div>
 
+  <div class="row">
+    <div class="col s6">
+      <div class="field">
+        <label for="project_start_date">Fecha Inicio</label>
+        <%= text_field_tag "project_start_date", @project.start_date, class: "datepicker" %>
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="field">
+        <label for="project_end_date">Fecha Termino</label>
+        <%= text_field_tag "project_end_date", @project.end_date, class: "datepicker" %>
+      </div>
+    </div>
+  </div>
+
   <div class="input-field field">
     <%= form.label :goal, "Objetivo" %>
     <%= form.text_area :goal, id: :project_goal, class: 'materialize-textarea' %>
@@ -71,6 +86,9 @@
     <%= form.label :business_unit_id, "Sede" %>
     <%= form.collection_select :business_unit_id, BusinessUnit.all, :id, :name  %>
   </div>
+
+
+
 
   <div class="actions">
     <%= form.submit 'Guardar', class: 'btn blue' %>

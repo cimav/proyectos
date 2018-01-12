@@ -27,6 +27,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     @schedule.user_id = current_user.id
     @schedule.status = Schedule::ACTIVE
+    @schedule.schedule_type = Schedule::DATE
     @project = @schedule.project
 
     if (params[:all_day]) 
