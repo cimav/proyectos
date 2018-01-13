@@ -7,6 +7,16 @@
         <div class="project-card-title title-informacion">Información</div>
         <%= render 'status_line', project: @project %>
         <div class="status-legend"><%= @project.project_status.name rescue '--' %></div>
+        <div class="row project-info-dates">
+          <div class="col s6">
+            <div class="project-date-header">Fecha Inicio</div>
+            <div class="project-date"><%= @project.start_date %></div>
+          </div>
+          <div class="col s6">
+            <div class="project-date-header">Fecha Termino</div>
+            <div class="project-date"><%= @project.end_date %></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -157,11 +157,13 @@ class Project < ApplicationRecord
   end
 
   def start_date
-    'IMPLEMENT ME'
+    d = self.schedules.where(schedule_type: Schedule::PROJECT_DURATION).first
+    d.start_date.strftime("%Y-%m-%d") rescue nil
   end
 
   def end_date
-    'IMPLEMENT ME'
+    d = self.schedules.where(schedule_type: Schedule::PROJECT_DURATION).first
+    d.end_date.strftime("%Y-%m-%d") rescue nil
   end
 
 

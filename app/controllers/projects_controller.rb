@@ -56,6 +56,24 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+  
+        #UPDATE dates
+        pd_res = @project.schedules.where(schedule_type: Schedule::PROJECT_DURATION)
+        if pd_res.count == 1
+          project_duration = pd_res.first
+          project_duration.user_id = current_user.id
+        else
+          project_duration = @project.schedules.new
+          project_duration.title = "Duración del proyecto"
+          project_duration.content = ""
+          project_duration.user_id = current_user.id
+          project_duration.schedule_type = Schedule::PROJECT_DURATION
+          project_duration.status = Schedule::ACTIVE
+        end
+        project_duration.start_date = params[:project_start_date]
+        project_duration.end_date = params[:project_end_date]
+        project_duration.save
+
         format.html { redirect_to details_project_url, notice: 'Proyecto actualizado.' }
         format.json { render :details, status: :ok, location: @project }
       else

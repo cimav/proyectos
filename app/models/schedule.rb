@@ -3,13 +3,11 @@ class Schedule < ApplicationRecord
   belongs_to :user
 
   DATE = 1
-  PROJECT_START = 98
-  PROJECT_END = 99
+  PROJECT_DURATION = 99
 
   TYPE_TEXT = {
     DATE => "Fecha importante",
-    PROJECT_START   => "Fecha Inicio",
-    PROJECT_END   => "Fecha Termino"
+    PROJECT_DURATION   => "Duración del proyecto",
   }
 
   ACTIVE = 1
