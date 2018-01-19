@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   has_many   :project_folders
   has_many   :project_files, :through => :project_folders
   has_many   :project_person
+  has_many   :project_participants
   has_many   :people, :through => :project_person
   
 
@@ -62,10 +63,6 @@ class Project < ApplicationRecord
       resume['disponible'] += row['total_disponible']
     end
     return resume
-  end
-  
-  def end_schedule
-    schedules.where(schedule_type: Schedule::PROJECT_END).first 
   end
 
   def purchase_requests(limit = nil)
@@ -158,12 +155,12 @@ class Project < ApplicationRecord
 
   def start_date
     d = self.schedules.where(schedule_type: Schedule::PROJECT_DURATION).first
-    d.start_date.strftime("%Y-%m-%d") rescue nil
+    d.start_date rescue nil
   end
 
   def end_date
     d = self.schedules.where(schedule_type: Schedule::PROJECT_DURATION).first
-    d.end_date.strftime("%Y-%m-%d") rescue nil
+    d.end_date rescue nil
   end
 
 

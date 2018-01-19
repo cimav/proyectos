@@ -32,8 +32,8 @@
           <div class="extra"><%= project.client.short_name %></div>
         </td>
         <td class="no-wrap">
-          <%= project.end_schedule.end_date.strftime "%B %e, %Y" rescue '--' %>
-          <div class="extra"><%= f_date_no_time(project.end_schedule.end_date) rescue '--' %></div>
+          <%= project.end_date.strftime "%B %e, %Y" rescue '--' %>
+          <div class="extra"><%= f_date_no_time(project.end_date) rescue '--' %></div>
         </td>
         <td class="no-wrap project-manager">
           <img src="<%= project.manager.picture %>" class="left circle">

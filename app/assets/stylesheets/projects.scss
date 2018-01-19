@@ -688,3 +688,18 @@ table.people {
   font-weight: 500;
   font-size: 140%;
 }
+
+.people-table {
+  tr {
+      .participant-delete {
+        display: none;
+      }
+
+      &:hover {
+        .participant-delete {
+          cursor: pointer;
+          display: inline;
+        }
+      }
+    }
+}

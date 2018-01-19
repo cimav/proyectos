@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110232335) do
+ActiveRecord::Schema.define(version: 20180118232215) do
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "auditable_id"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20180110232335) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
     t.index ["project_id"], name: "index_project_participants_on_project_id"
     t.index ["user_id"], name: "index_project_participants_on_user_id"
   end
@@ -275,6 +276,7 @@ ActiveRecord::Schema.define(version: 20180110232335) do
     t.integer "access"
     t.string "last_name"
     t.integer "business_unit_id"
+    t.string "phone"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 

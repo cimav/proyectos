@@ -10,11 +10,11 @@
         <div class="row project-info-dates">
           <div class="col s6">
             <div class="project-date-header">Fecha Inicio</div>
-            <div class="project-date"><%= @project.start_date %></div>
+            <div class="project-date"><%= @project.start_date.strftime("%Y-%m-%d") rescue '--' %></div>
           </div>
           <div class="col s6">
             <div class="project-date-header">Fecha Termino</div>
-            <div class="project-date"><%= @project.end_date %></div>
+            <div class="project-date"><%= @project.end_date.strftime("%Y-%m-%d") rescue '--' %></div>
           </div>
         </div>
       </div>

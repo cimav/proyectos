@@ -2,20 +2,93 @@
 <div class="project-area z-depth-1">
   <div class="project-area-title">Personas</div>
   <div class="spacer-2em"></div>
-  <table class="people bordered highlight">
+  <table class="people-table bordered highlight">
+    <tr>
+      <td colspan="4"><h4>CIMAV</h4></td>
+      <td colspan="2"><a class="waves-effect waves-light btn blue" id="add-participant-link"><i class="material-icons right">add</i>Agregar</a>
+</td>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Rol</th>
+      <th>Correo</th>
+      <th>Teléfono</th>
+      <th></th>
+    </tr>
+    <!-- RESPONSABLE -->
+    <tr>
+      <td class="person-avatar"><img src="<%= @project.manager.picture %>" class="circle picture-64 responsive-img"></td>
+      <td class="person-name"><%= @project.manager.full_name %></td>
+      <td>Responsable Técnico</td>
+      <td><%= @project.manager.email %></td>
+      <td>Tel. <%= @project.manager.phone %></td>
+      <td></td>
+    </tr>
+    <!-- AGENTE -->
+    <tr>
+      <td class="person-avatar"><img src="<%= @project.agent.picture %>" class="circle picture-64 responsive-img"></td>
+      <td class="person-name"><%= @project.agent.full_name %></td>
+      <td>Ejecutivo CIMAV</td>
+      <td><%= @project.agent.email %></td>
+      <td>Tel. <%= @project.agent.phone %></td>
+      <td></td>
+    </tr>
+    <% @project.project_participants.each do |participant| %>
+      <tr>
+        <td class="person-avatar"><img src="<%= participant.user.picture %>" class="circle picture-64 responsive-img"></td>
+        <td class="person-name"><%= participant.user.full_name %></td>
+        <td><%= participant.role %></td>
+        <td><%= participant.user.email %></td>
+        <td>Tel. <%= participant.user.phone %></td>
+        <td class="person-actions">
+          <a class="participant-delete" data-turbolinks="false" data-project-id="<%= @project_id %>" data-project-participant-id="<%= participant.id %>"><i class="material-icons tiny grey-text">cancel</i></a>
+        </td>
+      </tr>
+    <% end %>
   	<% @project.project_person.each do |project_person| %>
       <tr>
   	    <td class="person-avatar"><img src="<%= project_person.person.picture %>" class="circle picture-64 responsive-img"></td>
   	    <td>
   	      <div class="person-name"><%= project_person.person.name %></div>
-  	      <div class="person-email"><%= project_person.person.email %></div>
+  	      <div class="person-role"><%= project_person.person.attachable.short_name %></div>
   	    </td>
-  	    <td><%= project_person.role %><br/><%= project_person.person.attachable.short_name %></td>
+        <td><%= project_person.person.email %></td>
   	    <td>Tel. <%= project_person.person.phone %></td>
+        <td class="person-actions">
+          <a class="file-delete" data-turbolinks="false" data-project-id="<%= @project_id %>" data-project-person-id="<%= project_person.id %>"><i class="material-icons tiny grey-text">cancel</i></a>
+        </td>
       </tr>
     <% end %>
   </table>
 </div>
+
+<!-- Modal New Participant -->
+<div id="modal-new-participant" class="modal bottom-sheet">
+  <div class="modal-content">
+    <form action="<%= project_participants_path %>" method="POST">
+    <% participant = ProjectParticipant.new %>
+    <%= form_with(model: participant, local: true) do |form| %>
+      <div class="row">
+        <div class="col s5">
+          <div class="field">
+            <%= form.collection_select :user_id, User.where("id NOT IN (SELECT user_id FROM project_participants WHERE project_id = ?) AND id <> ? AND id <> ?", @project.id, @project.manager_id, @project.agent_id).order('first_name, last_name'), :id, :full_name  %>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="field">
+            <input type="hidden" name="project_participant[project_id]" value="<%= @project.id %>">
+            <%= form.text_field :role, id: :project_role, placeholder: "Rol...", class: "participant_role_input" %>
+          </div>
+        </div>
+        <div class="col s3">
+          <button id="new_folder_btn" type="submit" class="btn red" data-user-id="<%= current_user.id %>" data-project-id="<%= @project.id %>">Agregar participante</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <script>
 Materialize.toast('<%= notice %>', 3000)
 </script>

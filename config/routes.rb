@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   scope(:path_names => { :new => "nuevo", :edit => "editar", :create => "crear", :delete => "eliminar" }) do
     resources :project_files, :path=>'archivos'
+    resources :project_participants, :path => 'participantes'
     resources :projects, :path => "proyectos"  do
       member do
 

@@ -31,13 +31,14 @@ module ApplicationHelper
     elsif "#{date.year}#{date.month}#{date.day}" == "#{Time.now.year}#{Time.now.month}#{Time.now.day + 1}"
       r_date = "Mañana"
     else
-      d = "#{date.year}#{date.month}#{date.day}".to_i
-      t = "#{Time.now.year}#{Time.now.month}#{Time.now.day}".to_i
+      d = date.to_date
+      t = Time.now.to_date
       if d > t
-        r_date = "En #{d - t} días"
+        r_date = "En #{(d - t).to_i} días"
       else 
-        r_date = "Hace #{t - d} días"
+        r_date = "Hace #{(t - d).to_i} días"
       end
+      
     end
   end
 
