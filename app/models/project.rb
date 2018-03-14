@@ -128,7 +128,8 @@ class Project < ApplicationRecord
           LEFT JOIN netmultix.pr12 ON TRIM(ct05_cta_det) LIKE CONCAT(TRIM(pr12_pre_ini),'%') 
         WHERE 
           ct05_proyecto LIKE '#{self.erp_number}%' 
-          AND pr12_columna IN (1,2,3,4,5,6) 
+          AND pr12_columna IN (1,2,3,4,5,6)
+          AND ct05_anio = YEAR(NOW()) 
         GROUP BY ct05_partida, pr12_columna 
         ORDER BY ct05_partida
       ) subtabla
