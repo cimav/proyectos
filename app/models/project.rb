@@ -28,6 +28,20 @@ class Project < ApplicationRecord
     RESEARCH_TECH    => "Desarrollo Tecnológico"
   }
 
+  STATUS_END = 99
+  STATUS_CANCELLED = -1
+
+
+  PROJECT_FILTER = {
+    'responsable'   => 'Proyectos en los que soy responsable',
+    'participo'     => 'Proyectos en los que participo',
+    'mis-proyectos' => 'Todos mis proyectos',
+    'administro'    => 'Proyectos que administro',
+    'activos'       => 'Proyectos activos',
+    'todos'         => 'Todos los proyectos'
+  }
+
+
 
   STATUS_REQ_TEXT = {
     -1 => 'Req. capturada',
