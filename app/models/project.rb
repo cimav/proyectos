@@ -97,7 +97,9 @@ class Project < ApplicationRecord
             LEFT JOIN netmultix.no01 u on co01_usuario = u.no01_cve_emp 
             LEFT JOIN netmultix.no01 r on co01_cve_responsable = r.no01_cve_emp 
             LEFT JOIN netmultix.no01 s on co01_solicitante = s.no01_cve_emp 
-          WHERE co02_proyecto LIKE '%#{self.erp_number}%'  
+          WHERE 
+            co02_proyecto LIKE '%#{self.erp_number}%'  
+            AND SUBSTRING(co01_fecha_req,1,4) = YEAR(NOW())
           ORDER BY co01_fecha_req DESC"
 
     if limit && limit > 0
