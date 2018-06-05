@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col s12">
 
-    <a class='dropdown-button btn white black-text btn-flat' id='project-dropdown-title' href='#' data-activates='dropdown1'><%= @projects.count %> <%= Project::PROJECT_FILTER[@p] %> <i class="material-icons right black-text">arrow_drop_down</i></a>
+    <a class='dropdown-button btn white black-text btn-flat' id='project-dropdown-title' href='#' data-activates='dropdown1'><%= @projects.count rescue '-' %> <%= Project::PROJECT_FILTER[@p] %> <i class="material-icons right black-text">arrow_drop_down</i></a>
 
     <ul id='dropdown1' class='dropdown-content'>
       <li><a href="?p=responsable">Proyectos en los que soy responsable</a></li>
@@ -33,43 +33,45 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td>
-          <%= link_to project.internal_name, project %>
-          <div class="extra"><%= project.client.short_name %></div>
-        </td>
-        <td class="no-wrap">
-          <%= project.end_date.strftime "%B %e, %Y" rescue '--' %>
-          <div class="extra"><%= f_date_no_time(project.end_date) rescue '--' %></div>
-        </td>
-        <td class="no-wrap project-manager">
-          <img src="<%= project.manager.picture %>" class="left circle">
-          <%= project.manager.full_name %>
-          <div class="extra">
-            <%= project.department.name %>
-          </div>
-        </td>
-        <td class="no-wrap project-budget">
-          <% budget_resume = project.budget_resume %>
-          <% if budget_resume['autorizado'] == 0 
-               budget_percentage = 100
-             else
-               budget_percentage = 100 - (budget_resume['disponible'] * 100 / budget_resume['autorizado']).round 
-             end
-          %>
-          <div class="c100 p<%= budget_percentage %> xsmall c-green">
-            <span><%= budget_percentage %>%</span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
+    <% if @projects %>
+      <% @projects.each do |project| %>
+        <tr>
+          <td>
+            <%= link_to project.internal_name, project %>
+            <div class="extra"><%= project.client.short_name %></div>
+          </td>
+          <td class="no-wrap">
+            <%= project.end_date.strftime "%B %e, %Y" rescue '--' %>
+            <div class="extra"><%= f_date_no_time(project.end_date) rescue '--' %></div>
+          </td>
+          <td class="no-wrap project-manager">
+            <img src="<%= project.manager.picture %>" class="left circle">
+            <%= project.manager.full_name %>
+            <div class="extra">
+              <%= project.department.name %>
             </div>
-          </div>
-          <%= number_to_currency(budget_resume['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %>
-          <div class="extra">Disponible: <%= number_to_currency(budget_resume['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></div>
-        </td>
-        <td class="no-wrap"><%= project.project_status.name rescue '--' %></td>
-      </tr>
+          </td>
+          <td class="no-wrap project-budget">
+            <% budget_resume = project.budget_resume %>
+            <% if budget_resume['autorizado'] == 0 
+                 budget_percentage = 100
+               else
+                 budget_percentage = 100 - (budget_resume['disponible'] * 100 / budget_resume['autorizado']).round 
+               end
+            %>
+            <div class="c100 p<%= budget_percentage %> xsmall c-green">
+              <span><%= budget_percentage %>%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <%= number_to_currency(budget_resume['autorizado'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %>
+            <div class="extra">Disponible: <%= number_to_currency(budget_resume['disponible'], negative_format: '<span class="red-text">-%u%n</span>'.html_safe) %></div>
+          </td>
+          <td class="no-wrap"><%= project.project_status.name rescue '--' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

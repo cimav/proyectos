@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @p = params[:p]
+    @p = 'mis-proyectos' if !@p
+
     case @p 
     when 'responsable'
       @projects = Project.where("manager_id = ? AND status <> ? AND status <> ?", current_user.id, Project::STATUS_END, Project::STATUS_CANCELLED)
