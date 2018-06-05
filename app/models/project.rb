@@ -103,7 +103,6 @@ class Project < ApplicationRecord
     return rows
   end
 
-
   def budget_details
     sql = "SELECT 
         ct05_partida AS partida, 
@@ -124,7 +123,7 @@ class Project < ApplicationRecord
           IF(pr12_columna = 6, SUM(ct05_deb_det-ct05_hab_det),0) AS PorComprobar,
           IF(pr12_columna = 5, SUM(ct05_deb_det-ct05_hab_det),0) AS Comprometido 
         FROM 
-          netmultix.ct05_2017 
+          netmultix.ct05
           LEFT JOIN netmultix.pr12 ON TRIM(ct05_cta_det) LIKE CONCAT(TRIM(pr12_pre_ini),'%') 
         WHERE 
           ct05_proyecto LIKE '#{self.erp_number}%' 
