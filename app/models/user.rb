@@ -10,10 +10,12 @@ class User < ApplicationRecord
 
   ACCESS_USER  = 0
   ACCESS_ADMIN = 1
+  ACCESS_AGENT = 2
 
   ACCESS_TYPE = {
     ACCESS_USER  => "Usuario",
-    ACCESS_ADMIN => "Administrador"
+    ACCESS_ADMIN => "Administrador",
+    ACCESS_AGENT => "Agente"
   }
 
   STATUS_TEXT = {
@@ -36,6 +38,10 @@ class User < ApplicationRecord
 
   def full_name
   	"#{first_name} #{last_name}"
+  end
+
+  def is_agent?
+    access == ACCESS_AGENT || access == ACCESS_ADMIN
   end
   
 end

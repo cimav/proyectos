@@ -2,13 +2,21 @@
 <div class="row">
   <div class="col s12">
 
-    <a class='dropdown-button btn white black-text btn-flat' id='project-dropdown-title' href='#' data-activates='dropdown1'><%= @projects.count %> proyectos activos <i class="material-icons right black-text">arrow_drop_down</i></a>
+    <a class='dropdown-button btn white black-text btn-flat' id='project-dropdown-title' href='#' data-activates='dropdown1'><%= @projects.count %> <%= Project::PROJECT_FILTER[@p] %> <i class="material-icons right black-text">arrow_drop_down</i></a>
 
     <ul id='dropdown1' class='dropdown-content'>
-      <li><a href="#!">Proyectos activos</a></li>
+      <li><a href="?p=responsable">Proyectos en los que soy responsable</a></li>
+      <li><a href="?p=participo">Proyectos en los que participo</a></li>
+      <li><a href="?p=mis-proyectos">Todos mis proyectos</a></li>
+      <% if current_user.is_agent? %>
+        <li><a href="?p=administro">Proyectos que administro</a></li>
+        <li><a href="?p=activos">Proyectos activos</a></li>
+        <li><a href="?p=todos">Todos los proyectos</a></li>
+      <% end %>
     </ul>
-
-    <%= link_to 'Crear Nuevo Proyecto', new_project_path, class: 'waves-effect waves-light btn right blue' %>
+    <% if current_user.is_agent? %>
+      <%= link_to 'Crear Nuevo Proyecto', new_project_path, class: 'waves-effect waves-light btn right blue' %>
+    <% end %>
   </div>
 </div>
 

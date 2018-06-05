@@ -12,7 +12,22 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @p = params[:p]
+    case @p 
+    when 'responsable'
+      @projects = Project.where("manager_id = ? AND status <> ? AND status <> ?", current_user.id, Project::STATUS_END, Project::STATUS_CANCELLED)
+    when 'participo'
+      @projects = Project.where("(manager_id = ? OR agent_id = ? OR ? IN (SELECT user_id FROM project_participants WHERE project_id = projects.id) ) AND (status <> ? AND status <> ?)", current_user.id, current_user.id, current_user.id, Project::STATUS_END, Project::STATUS_CANCELLED)
+    when 'mis-proyectos'
+      @projects = Project.where("manager_id = ? OR agent_id = ? OR ? IN (SELECT user_id FROM project_participants WHERE project_id = projects.id)", current_user.id, current_user.id, current_user.id)
+    when 'administro'
+      @projects = Project.where("agent_id = ? AND status <> ? AND status <> ?", current_user.id, Project::STATUS_END, Project::STATUS_CANCELLED)
+    when 'activos'
+      @projects = Project.all
+    when 'todos'
+      @projects = Project.all
+    end 
+    
   end
 
   # GET /projects/1

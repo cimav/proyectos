@@ -28,6 +28,20 @@ class Project < ApplicationRecord
     RESEARCH_TECH    => "Desarrollo Tecnológico"
   }
 
+  STATUS_END = 99
+  STATUS_CANCELLED = -1
+
+
+  PROJECT_FILTER = {
+    'responsable'   => 'Proyectos en los que soy responsable',
+    'participo'     => 'Proyectos en los que participo',
+    'mis-proyectos' => 'Todos mis proyectos',
+    'administro'    => 'Proyectos que administro',
+    'activos'       => 'Proyectos activos',
+    'todos'         => 'Todos los proyectos'
+  }
+
+
 
   STATUS_REQ_TEXT = {
     -1 => 'Req. capturada',
@@ -127,7 +141,8 @@ class Project < ApplicationRecord
           LEFT JOIN netmultix.pr12 ON TRIM(ct05_cta_det) LIKE CONCAT(TRIM(pr12_pre_ini),'%') 
         WHERE 
           ct05_proyecto LIKE '#{self.erp_number}%' 
-          AND pr12_columna IN (1,2,3,4,5,6) 
+          AND pr12_columna IN (1,2,3,4,5,6)
+          AND ct05_anio = YEAR(NOW()) 
         GROUP BY ct05_partida, pr12_columna 
         ORDER BY ct05_partida
       ) subtabla
