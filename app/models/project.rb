@@ -121,7 +121,6 @@ class Project < ApplicationRecord
     return rows
   end
 
-
   def budget_details
     sql = "SELECT 
         ct05_partida AS partida, 

@@ -49,5 +49,8 @@ test:
 production:
   <<: *default
   database: proyectos_production
-  username: proyectos
-  password: <%= ENV['XXX_DATABASE_PASSWORD'] %>
+  username: admin
+#  password: <%= ENV['PROYECTOS_DATABASE_PASSWORD'] %>
+  password: azul0735
+  host: fermi.cimav.edu.mx
+  
