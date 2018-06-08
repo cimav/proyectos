@@ -17,6 +17,8 @@ class Project < ApplicationRecord
 
 
   before_validation :set_extra, on: :create
+  after_create :generate_first_folder
+
 
   RESEARCH_BASIC   = 1
   RESEARCH_APPLIED = 2
@@ -187,8 +189,19 @@ class Project < ApplicationRecord
   	  self.department_id = self.manager.department_id
       self.name = self.internal_name
 
-      first_status = self.project_type.project_statuses.where(position: 1).first
+      first_status = self.project_type.project_statuses.order(:position).first
+
       self.status = first_status.id
+
+    end
+
+    def generate_first_folder
+      first_folder = self.project_folders.new
+      first_folder.name = 'Otros'
+      first_folder.description = ''
+      first_folder.folder_type = 1
+      first_folder.user_id = self.agent_id
+      first_folder.save
     end
 
 end

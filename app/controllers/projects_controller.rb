@@ -169,11 +169,15 @@ class ProjectsController < ApplicationController
   def files
     # Redirect to first folder
     first = @project.project_folders.order(:name).first 
+    
+
     redirect_to action: "folder_files", id: @project.id, project_folder_id: first.id
   end
 
   def folder_files
-    @project_folder = @project.project_folders.find(params[:project_folder_id]) 
+    if params[:project_folder_id] && params[:project_folder_id].to_i > 0
+      @project_folder = @project.project_folders.find(params[:project_folder_id]) 
+    end
   end
 
   def folder_files_list
